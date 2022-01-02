@@ -1,0 +1,314 @@
+﻿@{
+    ViewData["Title"] = "Inicio";
+
+}
+
+
+
+<div class="card p-2 mb-4 rounded m-3" style="background-color: #e5e5e5; border-radius:15px !important;">
+    <div class="card-header card-headerP" style="border-radius: 15px 15px 0px 0px !important;">
+        <h1 class="h4"><i class="fas fa-home"></i> @ViewData["Title"]</h1>
+    </div>
+    <div class="row mb-3">
+        <div class="col-6">
+
+            <canvas id="gra"></canvas>
+
+        </div>
+        <div class="col-6 pt-4">
+
+            <canvas dir="rtl" class="mt-4" id="bar-chart"></canvas>
+
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-6">
+            <canvas id="myChart"></canvas>
+        </div>
+        <div class="col-6">
+            <canvas id="porTipoProducto">
+            </canvas>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+@section Styles{
+    <style>
+        #gra, #myChart, #porTipoProducto {
+            width: 400px !important;
+            height: 380px !important;
+        }
+
+        @@keyframeschartjs-render-animation {
+            from {
+                opacity: .99
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        .chartjs-render-monitor {
+            animation: chartjs-render-animation 1ms;
+            max-height: 600px;
+            display: block;
+        }
+
+        .chartjs-size-monitor,
+        .chartjs-size-monitor-expand,
+        .chartjs-size-monitor-shrink {
+            position: absolute;
+            direction: ltr;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
+            visibility: hidden;
+            z-index: -1
+        }
+
+            .chartjs-size-monitor-expand > div {
+                position: absolute;
+                width: 1000000px;
+                height: 1000000px;
+                left: 0;
+                top: 0
+            }
+
+            .chartjs-size-monitor-shrink > div {
+                position: absolute;
+                width: 200%;
+                height: 200%;
+                left: 0;
+                top: 0
+            }
+    </style>
+}
+
+@section scripts {
+    <script>
+
+
+
+    const datosTiposProd = [];
+
+      @foreach (var d in ViewBag.dataTipoPro)
+      {
+          // Using the @: operator
+          //we can use javascript variables in razor C#
+        @:datosTiposProd.push("@d");
+    }
+
+        var xValues = ["Insumos", "Medicamento", "Productos higiénicos" ,"Prótesis, órtesis y ayudas funcionales"];
+        var yValues = datosTiposProd;
+        var barColors = [
+            "#b91d47",
+            "#00aba9",
+            "#2b5797",
+            "#e8c3b9"
+        ];
+        new Chart("porTipoProducto", {
+            type: "pie",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+             options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Por tipo de producto'
+                    }
+                }
+            }
+        });
+ /*const labels = [
+    'Enero',
+    'Febreo',
+    'Marzo',
+    'Abril',
+    'Mayo',
+    'Junio',
+    'Julio',
+    'Agosto',
+    'Septiembre',
+    'Octubre',
+    'Noviembre',
+    'Diciembre'
+];
+*/
+const labels = [];
+
+    @foreach (var d in ViewBag.Estaus)
+    {
+        // Using the @: operator
+        //we can use javascript variables in razor C#
+        @:labels.push("@d");
+    }
+
+    const datos = [];
+
+      @foreach (var d in ViewBag.TotalPorEstatus)
+      {
+          // Using the @: operator
+          //we can use javascript variables in razor C#
+        @:datos.push("@d");
+    }
+            const estadosCiviles = [];
+
+      @foreach (var d in ViewBag.EstadosCiviles)
+    {
+      	// Using the @: operator
+      	//we can use javascript variables in razor C#
+        @:estadosCiviles.push("@d");
+    }
+
+                 const dataestadosCiviles = [];
+
+      @foreach (var d in ViewBag.DataPacientesEsta)
+    {
+      	// Using the @: operator
+      	//we can use javascript variables in razor C#
+        @:dataestadosCiviles.push("@d");
+    }
+
+
+        ////////////////////////////////
+
+                    const sangre = [];
+
+      @foreach (var d in ViewBag.Sangre)
+    {
+      	// Using the @: operator
+      	//we can use javascript variables in razor C#
+        @:sangre.push("@d");
+    }
+
+                 const totalSangre = [];
+
+      @foreach (var d in ViewBag.TotalPorSangre)
+    {
+      	// Using the @: operator
+      	//we can use javascript variables in razor C#
+        @:totalSangre.push("@d");
+    }
+
+
+        // Obtener una referencia al elemento canvas del DOM
+        const $grafica = document.querySelector("#bar-chart");
+        // Las etiquetas son las que van en el eje X.
+        const etiquetas = estadosCiviles
+        // Podemos tener varios conjuntos de datos. Comencemos con uno
+        const datosVentas2020 = {
+            label: "",
+            data: dataestadosCiviles, // La data es un arreglo que debe tener la misma cantidad de valores que la cantidad de etiquetas
+            backgroundColor: 'rgba(54, 162, 235, 0.2)', // Color de fondo
+            borderColor: 'rgba(54, 162, 235, 1)', // Color del borde
+            borderWidth: 1,// Ancho del borde
+        };
+        new Chart($grafica, {
+            type: 'bar',// Tipo de gráfica
+            data: {
+                labels: etiquetas,
+                datasets: [
+                    datosVentas2020,
+                    // Aquí más datos...
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                },
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Pacientes por estado civil'
+                    }
+                }
+            }
+        });// ToDo
+
+
+        // Obtener una referencia al elemento canvas del DOM
+        const $gra = document.querySelector("#gra");
+        // Las etiquetas son las porciones de la gráfica
+        const etiquetas2 = labels
+        // Podemos tener varios conjuntos de datos. Comencemos con uno
+        const datosIngresos = {
+            data: datos, // La data es un arreglo que debe tener la misma cantidad de valores que la cantidad de etiquetas
+            // Ahora debería haber tantos background colors como datos, es decir, para este ejemplo, 4
+            backgroundColor: [
+                'rgba(163,221,203,1)',
+                'rgba(232,233,161,1)',
+                'rgba(230,181,102,1)',
+                'rgba(229,112,126,1)',
+            ],// Color de fondo
+            borderColor: [
+                'rgba(163,221,203,1)',
+                'rgba(232,233,161,1)',
+                'rgba(230,181,102,1)',
+                'rgba(229,112,126,1)',
+            ],// Color del borde
+            borderWidth: 1,// Ancho del borde
+
+        };
+        new Chart($gra, {
+            type: 'pie',// Tipo de gráfica. Puede ser dougnhut o pie,
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Estatus de citas'
+                    }
+                }
+            },
+             data: {
+                labels: etiquetas2,
+                datasets: [
+                    datosIngresos,
+                    // Aquí más datos...
+                ]
+            },
+        });
+
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: totalSangre,
+                    backgroundColor: ['#42a5f5', 'red', 'green', 'blue', 'violet', '#42a5df','#423hf5'],
+                    label: 'Comparacion de navegadores'
+                }],
+                labels: sangre
+            },
+            options: { responsive: true },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Pacientes por profesion'
+                    }
+                }
+            }
+        });
+    </script>
+}

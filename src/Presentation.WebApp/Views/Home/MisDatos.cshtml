@@ -1,0 +1,166 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Datos contacto";
+}
+
+@model Domain.UsuarioInfo
+
+
+<div class="row card p-2 mb-4 rounded m-3" style="border-radius: 15px !important;">
+    <div class="card-header card-headerP" style="border-radius: 15px 15px 0px 0px !important;">
+        <h1 class="h4"><i class="fas fa-user-plus"></i> Actualizar mis datos personales</h1>
+    </div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="card-body" style="background-color: #e5e5e5 !important; font-size: 13px;">
+        <div class="row">
+            <div class="col">
+                <div class="text-center">
+                    <img id="miFoto" height="200" width="270" style="border-radius:120px !important;" src="@Model.FotoT" class="rounded">
+                </div>
+
+            </div>
+
+
+
+        </div>
+        <form asp-action="EditarMiInformacion" asp-controller="Home" method="post" enctype="multipart/form-data">
+
+            <div class="row mt-3 mb-2">
+                <div class="col">
+                    Usuario:
+                    <input type="text" asp-for="Usuario_N" class="form-control" disabled>
+                </div>
+                <div class="col">
+                    Identificador:
+                    <input type="text" asp-for="Id" name="Id" disabled class="form-control" placeholder="Identificador">
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+            </div>
+            <!-- ToDo -->
+            <div class="row mt-3 mb-2">
+
+                <div class="col">
+                    Nombre:
+                    <input type="text" asp-for="Nombre" disabled class="form-control" placeholder="Nombre">
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    Apellido paterno:
+                    <input type="text" asp-for="ApellidoP" disabled class="form-control" placeholder="Apellido paterno">
+                    <span asp-validation-for="ApellidoP" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    Apellido materno:
+                    <input type="text" asp-for="ApellidoM" disabled class="form-control" placeholder="Apellido materno">
+                    <span asp-validation-for="ApellidoM" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <div class="row mt-3 mb-2">
+                <div class="col">
+                    Edad:
+                    <input type="number" asp-for="Edad" class="form-control" min="1">
+                    <span asp-validation-for="Edad" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    Correo:
+                    <input type="text" asp-for="Correo" class="form-control">
+                    <span asp-validation-for="Correo" class="text-danger"></span>
+                </div>
+
+                <div class="col">
+                    Teléfono móvil:
+                    <input type="text" asp-for="NumCelular" class="form-control">
+                    <span asp-validation-for="NumCelular" class="text-danger"></span>
+
+                </div>
+            </div>
+            <div class="row mt-3 mb-2">
+
+                <div class="col">
+                    Teléfono domicilio:
+                    <input type="text" asp-for="NumDomicilio" class="form-control">
+                    <span asp-validation-for="NumDomicilio" class="text-danger"></span>
+
+                </div>
+
+            </div>
+            <div class="row mt-3 mb-2">
+
+                <div class="col">
+                    Estado civil:
+                    <select asp-for="Id_EstadoCivil" asp-items="@ViewBag.estadosCiviles" class="form-control">
+                    </select>
+                    <span asp-validation-for="Id_EstadoCivil" class="text-danger"></span>
+
+                </div>
+
+                <div class="col">
+                    Sexo:
+                    <select type="text" asp-for="Sexo" class="form-control">
+
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                        <option value="NoRespondo">Prefiero no responder</option>
+                    </select>
+                    <span asp-validation-for="Sexo" class="text-danger"></span>
+
+                </div>
+            </div>
+
+            <div class="row mt-3 mb-2">
+
+                <div class="col">
+                    Dirección:
+                    <textarea asp-for="Direccion" class="form-control"></textarea>
+                    <span asp-validation-for="Direccion" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    Rol:
+                    <input asp-for="Rol" disabled class="form-control" type="text" />
+                    <span asp-validation-for="Rol" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                Fotografía:
+                <input class="form-control" asp-for="FotoFile" accept=".jpg,.png" type="file">
+                <span asp-validation-for="FotoFile" class="text-danger"></span>
+
+            </div>
+
+
+            <br />
+
+            @if (ViewBag.seActualizo != null)
+            {
+
+
+                @if (ViewBag.seActualizo == true)
+                {
+                    <div class="alert alert-success" role="alert">
+                        Tu información se actualizo correctamente.
+                    </div>
+
+                }
+                else
+                {
+                    <div class="alert alert-danger" role="alert">
+                        Tu información no se actualizo corractamente, favor de intentar más tarde.
+                    </div>
+
+                }
+
+
+            }
+
+            <button class="btn btn-success" type="submit"><i class="fas fa-plus"></i> Guardar</button> |
+            <a asp-action="Index" class="btn btn-danger"><i class="far fa-window-close"></i> Cancelar</a>
+
+        </form>
+
+    </div>
+</div>

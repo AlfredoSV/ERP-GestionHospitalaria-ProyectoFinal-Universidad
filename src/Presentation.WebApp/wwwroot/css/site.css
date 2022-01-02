@@ -1,0 +1,241 @@
+﻿body {
+    min-height: 100vh;
+    /*min-height: -webkit-fill-available;*/
+}
+
+html {
+    /*height: -webkit-fill-available;*/
+}
+
+#body {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100vh;
+    /*height: -webkit-fill-available;*/
+    max-height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+    #body > main {
+        overflow-y: auto;
+    }
+
+.bi {
+    vertical-align: -.125em;
+    pointer-events: none;
+    fill: currentColor;
+}
+
+.dropdown-toggle {
+    outline: 0;
+}
+
+.nav-flush .nav-link {
+    border-radius: 0;
+}
+
+.btn-toggle {
+    display: inline-flex;
+    align-items: center;
+    padding: .25rem .5rem;
+    font-weight: 600;
+    color: rgba(0, 0, 0, .65);
+    background-color: transparent;
+    border: 0;
+}
+
+    .btn-toggle:hover,
+    .btn-toggle:focus {
+        color: rgba(0, 0, 0, .85);
+        background-color: #d2f4ea;
+    }
+
+    .btn-toggle::before {
+        width: 1.25em;
+        line-height: 0;
+        content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+        transition: transform .35s ease;
+        transform-origin: .5em 50%;
+    }
+
+    .btn-toggle[aria-expanded="true"] {
+        color: rgba(0, 0, 0, .85);
+    }
+
+        .btn-toggle[aria-expanded="true"]::before {
+            transform: rotate(90deg);
+        }
+
+.btn-toggle-nav a {
+    display: inline-flex;
+    padding: .1875rem .5rem;
+    margin-top: .125rem;
+    margin-left: 1.25rem;
+    text-decoration: none;
+}
+
+    .btn-toggle-nav a:hover,
+    .btn-toggle-nav a:focus {
+        background-color: #d2f4ea;
+    }
+
+.scrollarea {
+    overflow-y: auto;
+}
+
+.fw-semibold {
+    font-weight: 600;
+}
+
+.lh-tight {
+    line-height: 1.25;
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+
+.error {
+    width: 100%;
+    max-width: 600px;
+    padding: 15px;
+    margin: auto;
+}
+
+
+/******************************/
+
+li.puntero, svg.puntero,.ocultar{
+    Cursor: pointer;
+}
+
+#contenedor {
+    background-color: #E8EEF9 !important;
+    background:url("../images/fondo_web.jpg");
+    background-size:100% 100%;
+}
+
+.card-headerP,.cardHeaderModal {
+    background-color: #526a8b !important;
+    color: white !important;
+}
+
+#nav,#header {
+    background-color: #21416B !important;
+    color: white !important;
+}
+
+li a.active {
+    border-left: solid white 3px !important;
+    color: white;
+    text-decoration: none;
+    background-color: #0d6e9d;
+}
+
+li a:hover:not(.active) {
+    background-color: #526a8b;
+    color: white;
+    text-decoration: none;
+}
+
+#citasTabla_paginate{
+    margin-top:6px;
+}
+
+hr{
+    margin: 2px;
+}
+
+.btn-import{
+    background-color:#6fb5bd !important;
+    color:white !important;
+    font-size:13px !important;
+    
+}
+
+/*
+
+
+
+*/
+
+
+ul.acorh,
+ul.acorh * {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+ul.acorh {
+    margin: 10px auto;
+    padding: 0;
+    list-style: none;
+
+    width: 100%;
+    font-size: 12px;
+}
+
+    ul.acorh li {
+        list-style: none;
+    }
+
+        ul.acorh li a {
+            display: block;
+            padding: 10px 10px 10px 20px;
+            background-color: #21416B;
+            color: white;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+
+        ul.acorh li ul {
+            max-height: 0;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            overflow: hidden;
+            transition: .3s all ease-in;
+        }
+
+        ul.acorh li li a {
+            padding: 10px 10px 10px 40px;
+            background: #526a8b;
+            color: white;
+            font-size: 12px;
+            border: 0;
+            
+            box-sizing: border-box;
+        }
+
+ul.acorc li li:last-child a {
+    border-bottom: 0;
+}
+
+ul.acorh li:hover ul {
+    max-height: 300px;
+    transition: .3s all ease-in;
+}
+
+ul.acorh li a:hover {
+    background: #21416B;
+    color: white;
+}

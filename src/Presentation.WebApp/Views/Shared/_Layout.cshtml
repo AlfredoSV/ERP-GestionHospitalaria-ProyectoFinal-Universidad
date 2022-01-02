@@ -1,0 +1,234 @@
+﻿<!DOCTYPE html>
+<html lang="es-mx">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="durl()r" content="" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>@ViewData["Title"]</title>
+
+    <meta name="theme-color" content="#7952b3">
+
+    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <!--<link href="//cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    -->
+    <link href="//pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+
+    <!--<link href="//cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css" rel="stylesheet" crossorigin="anonymous" />-->
+    <link rel="stylesheet" type="text/css" href="~/lib/datatables/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="~/lib/datatables/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="~/lib/datatables/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="~/lib/alertifyjs/css/alertify.min.css" />
+    <!-- Default theme -->
+    <link rel="stylesheet" href="~/lib/alertifyjs/css/themes/default.min.css" />
+    <!-- Semantic UI theme -->
+    <link rel="stylesheet" href="~/lib/alertifyjs/css/themes/semantic.min.css" />
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="~/lib/alertifyjs/css/themes/bootstrap.min.css" />
+
+
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+
+<body>
+    <!--https://getbootstrap.com/docs/5.1/examples/sidebars/-->
+    <div id="body">
+
+        <!--d-flex-->
+        <header class=" flex-column flex-shrink-0 p-0 text-white" id="header" style="width: 230px;">
+            <nav id="nav">
+                <a href="/" class="d-flex align-items-center p-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span class="fs-4 m-2">UNITEC</span>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-file-medical" viewBox="0 0 16 16">
+                        <path d="M8.5 4.5a.5.5 0 0 0-1 0v.634l-.549-.317a.5.5 0 1 0-.5.866L7 6l-.549.317a.5.5 0 1 0 .5.866l.549-.317V7.5a.5.5 0 1 0 1 0v-.634l.549.317a.5.5 0 1 0 .5-.866L9 6l.549-.317a.5.5 0 1 0-.5-.866l-.549.317V4.5zM5.5 9a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z" />
+                        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z" />
+                    </svg>
+                </a>
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li><a asp-controller="Home" asp-action="Index" class="nav-link text-white @if(ViewData["Title"].ToString().Equals("Inicio")){@("active") }"><i class="fas fa-home  "></i> Inicio</a></li>
+
+
+                </ul>
+
+
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto acorh">
+
+                    <li>
+                        <a asp-controller="Home" asp-action="MisDatos" class="nav-link text-white @if(ViewData["Title"].ToString().Equals("Datos contacto")){@("active") }">
+                            <i class="far fa-address-card"></i> Mi información
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Productos" asp-action="Index" class='nav-link text-white @if(ViewData["Title"].ToString().Equals("Productos")){@("active") } '>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-inboxes" viewBox="0 0 16 16">
+                                <path d="M4.98 1a.5.5 0 0 0-.39.188L1.54 5H6a.5.5 0 0 1 .5.5 1.5 1.5 0 0 0 3 0A.5.5 0 0 1 10 5h4.46l-3.05-3.812A.5.5 0 0 0 11.02 1H4.98zm9.954 5H10.45a2.5 2.5 0 0 1-4.9 0H1.066l.32 2.562A.5.5 0 0 0 1.884 9h12.234a.5.5 0 0 0 .496-.438L14.933 6zM3.809.563A1.5 1.5 0 0 1 4.981 0h6.038a1.5 1.5 0 0 1 1.172.563l3.7 4.625a.5.5 0 0 1 .105.374l-.39 3.124A1.5 1.5 0 0 1 14.117 10H1.883A1.5 1.5 0 0 1 .394 8.686l-.39-3.124a.5.5 0 0 1 .106-.374L3.81.563zM.125 11.17A.5.5 0 0 1 .5 11H6a.5.5 0 0 1 .5.5 1.5 1.5 0 0 0 3 0 .5.5 0 0 1 .5-.5h5.5a.5.5 0 0 1 .496.562l-.39 3.124A1.5 1.5 0 0 1 14.117 16H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .121-.393zm.941.83.32 2.562a.5.5 0 0 0 .497.438h12.234a.5.5 0 0 0 .496-.438l.32-2.562H10.45a2.5 2.5 0 0 1-4.9 0H1.066z" />
+                            </svg> Productos
+                        </a>
+
+
+                        <ul>
+                            <li><a asp-controller="Productos" asp-action="Index"><i class="far fa-trash-alt"></i> Eliminar y/o Editar</a></li>
+
+                            <li><a asp-controller="Productos" asp-action="Details"><i class="fas fa-list"></i> Listar</a></li>
+                            <li><a asp-controller="Productos" asp-action="Create"><i class="fas fa-plus-square"></i> Alta</a></li>
+                        </ul>
+                    </li>
+
+
+
+
+                    <li>
+                        <a href="#" class='nav-link text-white @if(ViewData["Title"].ToString().Equals("Pacientes")){@("active") } '>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-person-fill" viewBox="0 0 16 16">
+                                <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11z" />
+                            </svg> Pacientes
+                        </a>
+                        <ul>
+                            <li><a asp-controller="Pacientes" asp-action="Delete"><i class="far fa-trash-alt"></i> Eliminar y/o Editar</a></li>
+                            <li><a asp-controller="Pacientes" asp-action="Index"><i class="fas fa-list"></i> Listar</a></li>
+                            <li><a asp-controller="Pacientes" asp-action="Create"><i class="fas fa-user-plus"></i> Alta</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a asp-controller="Citas" asp-action="Index" class='nav-link text-white @if(ViewData["Title"].ToString().Equals("Citas")  || ViewData["Title"].ToString().Equals("Crear nueva cita")){@("active") } '>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-check" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                                <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
+                                <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
+                            </svg> Citas
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="nav-link text-white @if(ViewData["Title"].ToString().Equals("Doctores")){@("active") }">
+                            <i class="fas fa-users"></i>  Doctores
+                        </a>
+                        <ul>
+                            <li><a asp-controller="Doctores" asp-action="Edit"><i class="far fa-trash-alt"></i> Eliminar y/o Editar</a></li>
+
+                            <li><a asp-controller="Doctores" asp-action="Index"><i class="fas fa-list"></i> Listar</a></li>
+                            <li><a asp-controller="Doctores" asp-action="Create"><i class="fas fa-user-plus"></i> Alta</a></li>
+                        </ul>
+                    </li>
+
+
+
+
+                    <hr>
+                    <li>
+                        <a href="#" class="nav-link text-white @if(ViewData["Title"].ToString().Equals("Usuarios")){@("active") }">
+                            <i class="fas fa-users-cog"></i> Administración de Usuarios
+                        </a>
+                        <ul>
+                            <li><a asp-controller="Usuarios" asp-action="Index"><i class="fas fa-list"></i> Gestionar roles</a></li>
+
+
+                        </ul>
+
+                    </li>
+
+
+                </ul>
+                <hr>
+
+            </nav>
+        </header>
+        <main class="flex-fill" id="contenedor">
+            <div class="px-0">
+                <div id="nav" class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom p-2 bg-light">
+
+                    <div class="btn-toolbar mb-2 mb-md-0 ocultar" onclick="ocultar()">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="currentColor" class="bi bi-filter-left" viewBox="0 0 16 16">
+                            <path d="M2 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+                        </svg>
+
+
+                    </div>
+
+
+
+                    <div class="btn-toolbar mb-2 mb-md-0">
+
+                        <partial name="_LoginPartial" />
+
+                    </div>
+                </div>
+                <div class="container-fluid px-4">
+
+                    @RenderBody()
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!--https://getbootstrap.com/docs/5.1/components/modal/-->
+    <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailsModalLabel">Detalles</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="detallesModalContent" class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+     <script src="//cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    -->
+    <!--<script src="//cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js" crossorigin="anonymous"></script>-->
+    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js" crossorigin="anonymous"></script>-->
+    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js" crossorigin="anonymous"></script>-->
+    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js" crossorigin="anonymous"></script>-->
+    <!--<script src="//cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js" crossorigin="anonymous"></script>
+    <script src="//cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js" crossorigin="anonymous"></script>-->
+    <script src="~/lib/chartjs/chart.min.js"></script>
+
+    <script src="~/lib/jquery/jquery.min.js" type="text/javascript" charset="utf8"></script>
+    <script src="~/lib/datatables/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf8"></script>
+
+    <script src="~/lib/datatables/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
+
+    <script src="~/lib/datatables/js/dataTables.buttons.min.js" type="text/javascript" charset="utf8"></script>
+    <script src="~/lib/datatables/js/jszip.min.js" type="text/javascript" charset="utf8"></script>
+    <script src="~/lib/datatables/js/pdfmake.min.js" type="text/javascript" charset="utf8"></script>
+    <script src="~/lib/datatables/js/vfs_fonts.js" type="text/javascript" charset="utf8"></script>
+    <script src="~/lib/datatables/js/buttons.html5.min.js" type="text/javascript" charset="utf8"></script>
+    <script src="~/lib/datatables/js/buttons.print.min.js" type="text/javascript" charset="utf8"></script>
+    <script src="~/lib/jquery-validation/jquery.validate.min.js" type="text/javascript" charset="utf8"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" type="text/javascript" charset="utf8"></script>
+    <script src="~/lib/alertifyjs/alertify.min.js"></script>
+
+    <script>
+        function ocultar() {
+
+            let x = document.querySelector("#header");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

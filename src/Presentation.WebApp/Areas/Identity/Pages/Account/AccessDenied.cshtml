@@ -1,0 +1,17 @@
+﻿@page
+@model AccessDeniedModel
+@{
+    ViewData["Title"] = "Acceso denegado";
+}
+
+<!--<header>
+    <h1 class="text-danger">@ViewData["Title"]</h1>
+    <p class="text-danger">You do not have access to this resource.</p>
+</header>-->
+
+<div class="jumbotron jumbotron-fluid text-black alert alert-danger">
+    <div class="container">
+        <h1 class="display-4">@ViewData["Title"] :(</h1>
+        <p class="lead">No tienes acceso a este recurso, favor de contactar al administrador para solicitar los permisos necesarios.</p>
+    </div>
+</div>

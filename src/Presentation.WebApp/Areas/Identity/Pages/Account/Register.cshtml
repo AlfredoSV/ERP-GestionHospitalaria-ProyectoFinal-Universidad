@@ -1,0 +1,38 @@
+@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Registrarse";
+}
+
+
+
+<div class="form-signin rounded mt-lg-5 mb-lg-5"  style="background-color: #E8E2E2;">
+    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <h1 class="h3 mb-3 fw-normal"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+</svg> @ViewData["Title"]</h1>
+        <hr />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group mb-3">
+            <label asp-for="Input.Email"></label>
+            <input asp-for="Input.Email" class="form-control" />
+            <!--<span asp-validation-for="Input.Email" class="text-danger"></span>-->
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="Input.Password"></label>
+            <input asp-for="Input.Password" class="form-control" />
+            <!--<span asp-validation-for="Input.Password" class="text-danger"></span>-->
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="Input.ConfirmPassword"></label>
+            <input asp-for="Input.ConfirmPassword" class="form-control" />
+            <!--<span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>-->
+        </div>
+        <button type="submit" class="w-100 btn btn-lg btn-primary mb-auto">Registrar</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
