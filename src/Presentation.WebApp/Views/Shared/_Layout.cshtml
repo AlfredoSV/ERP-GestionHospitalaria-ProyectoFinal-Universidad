@@ -215,18 +215,8 @@
     <script src="~/lib/jquery-validation/jquery.validate.min.js" type="text/javascript" charset="utf8"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" type="text/javascript" charset="utf8"></script>
     <script src="~/lib/alertifyjs/alertify.min.js"></script>
+    <script src="~/js/main.js"></script>
 
-    <script>
-        function ocultar() {
-
-            let x = document.querySelector("#header");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
-            }
-        }
-    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
