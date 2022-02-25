@@ -11,7 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using Application.IServicios;
+using Application.Servicios;
 
 namespace Presentation.WebApp
 {
@@ -31,7 +32,11 @@ namespace Presentation.WebApp
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.ConfigureApplicationCookie(options => {
+            services.AddTransient<IFileConvertService, FileConverterService>();
+
+
+            services.ConfigureApplicationCookie(options =>
+            {
                 // Cookie settings
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
@@ -41,7 +46,7 @@ namespace Presentation.WebApp
                 options.SlidingExpiration = true;
             });
 
-           
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

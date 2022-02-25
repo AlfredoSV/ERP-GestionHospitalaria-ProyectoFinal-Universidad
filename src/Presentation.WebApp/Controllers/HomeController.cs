@@ -11,6 +11,8 @@ using Application;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using Application.IServicios;
 
 namespace Presentation.WebApp.Controllers
 {
@@ -23,7 +25,9 @@ namespace Presentation.WebApp.Controllers
         private readonly DoctoresDbContext _doctoresDbContext;
         private readonly UsuariosDbContext _usuariosDbContext;
         private readonly ProductosDbContext _productosDbContext;
-        public HomeController(IConfiguration configuration)
+        private readonly IFileConvertService _fileConvertService;
+
+        public HomeController(IConfiguration configuration, IFileConvertService fileConvertService)
         {
             _pacientesDbContext = new PacientesDbContext(configuration.GetConnectionString("DefaultConnection"));
             _citasDbContext = new CitasDbContext(configuration.GetConnectionString("DefaultConnection"));
@@ -31,7 +35,7 @@ namespace Presentation.WebApp.Controllers
             _doctoresDbContext = new DoctoresDbContext(configuration.GetConnectionString("DefaultConnection"));
             _usuariosDbContext = new UsuariosDbContext(configuration.GetConnectionString("DefaultConnection"));
             _productosDbContext = new ProductosDbContext(configuration.GetConnectionString("DefaultConnection"));
-
+            _fileConvertService = fileConvertService;
         }
 
 
@@ -146,7 +150,7 @@ namespace Presentation.WebApp.Controllers
                 }
                 else
                 {
-                    foto = FileConverterService.ConvertToBase64(data.FotoFile.OpenReadStream());
+                    foto = _fileConvertService.ConvertToBase64(data.FotoFile.OpenReadStream());
                 }
                 data.FotoT = foto;
                 var seActualizo = _usuariosDbContext.EditarMisDatos(data, userName);
