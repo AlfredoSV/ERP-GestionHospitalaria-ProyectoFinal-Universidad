@@ -120,7 +120,7 @@ function details(controller, id) {
 
 $(document).ready(function () {
 
-
+    alert("")
 
     $.ajax({
         type: "POST",
@@ -160,7 +160,7 @@ exampleModal.addEventListener('show.bs.modal', function (event) {
 })
 
 function listarCitas() {
-
+    alert("s");
 
     $.ajax({
         type: "POST",
