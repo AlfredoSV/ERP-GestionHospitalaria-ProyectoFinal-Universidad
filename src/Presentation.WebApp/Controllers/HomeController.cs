@@ -19,7 +19,8 @@ namespace Presentation.WebApp.Controllers
     [Authorize(Roles = "Admin,Doctor,Enfermera")]
     public class HomeController : Controller
     {
-        private readonly CitasDbContext _citasDbContext;
+        private readonly IServicioCitas _servicioCitas;
+
         private readonly CatalogosDbContext _catalogosDbContext;
         private readonly PacientesDbContext _pacientesDbContext;
         private readonly DoctoresDbContext _doctoresDbContext;
@@ -27,10 +28,10 @@ namespace Presentation.WebApp.Controllers
         private readonly ProductosDbContext _productosDbContext;
         private readonly IFileConvertService _fileConvertService;
 
-        public HomeController(IConfiguration configuration, IFileConvertService fileConvertService)
+        public HomeController(IConfiguration configuration, IFileConvertService fileConvertService, IServicioCitas servicioCitas)
         {
             _pacientesDbContext = new PacientesDbContext(configuration.GetConnectionString("DefaultConnection"));
-            _citasDbContext = new CitasDbContext(configuration.GetConnectionString("DefaultConnection"));
+            _servicioCitas = servicioCitas;
             _catalogosDbContext = new CatalogosDbContext(configuration.GetConnectionString("DefaultConnection"));
             _doctoresDbContext = new DoctoresDbContext(configuration.GetConnectionString("DefaultConnection"));
             _usuariosDbContext = new UsuariosDbContext(configuration.GetConnectionString("DefaultConnection"));
@@ -58,7 +59,7 @@ namespace Presentation.WebApp.Controllers
             ////////////////Por especialidad
             ///
 
-            var dataDoc = _citasDbContext.ListGrafi().GroupBy(info => info.EstatusCita)
+            var dataDoc = _servicioCitas.ListarCitasGraficas().GroupBy(info => info.EstatusCita)
                         .Select(group => new
                         {
                             Metric = group.Key,

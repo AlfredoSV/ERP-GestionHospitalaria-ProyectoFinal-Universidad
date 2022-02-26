@@ -13,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Application.IServicios;
 using Application.Servicios;
+using Domain.IRepositorios;
+using Infrastructure;
 
 namespace Presentation.WebApp
 {
@@ -31,9 +33,11 @@ namespace Presentation.WebApp
             services.AddDbContext<IdentityDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddScoped(connectionString => Configuration.GetConnectionString("DefaultConnection"));
 
             services.AddTransient<IFileConvertService, FileConverterService>();
-
+            services.AddTransient<IRepositorioCitas, CitasDbContext>();
+            services.AddTransient<IServicioCitas, ServicioCita>();
 
             services.ConfigureApplicationCookie(options =>
             {
