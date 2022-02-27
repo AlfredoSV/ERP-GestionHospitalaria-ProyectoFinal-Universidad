@@ -10,9 +10,9 @@ namespace Application.IServicios
     public interface IServicioDoctor
     {
         List<Doctor> ConsultarDoctores();
-        Doctor ConsultarDetalleDoctor();
-        void RegistrarDoctor();
-        void EditarDoctor();
-        void EliminarDoctor();
+        Doctor ConsultarDetalleDoctor(Guid id);
+        void RegistrarDoctor(Doctor doctor);
+        bool EditarDoctor(Doctor doctor);
+        bool EliminarDoctor(Guid id);
     }
 }

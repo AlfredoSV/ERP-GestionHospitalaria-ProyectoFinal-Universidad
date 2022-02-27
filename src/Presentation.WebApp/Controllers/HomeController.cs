@@ -23,7 +23,7 @@ namespace Presentation.WebApp.Controllers
 
         private readonly CatalogosDbContext _catalogosDbContext;
         private readonly PacientesDbContext _pacientesDbContext;
-        private readonly DoctoresDbContext _doctoresDbContext;
+        private readonly RepositorioDoctores _doctoresDbContext;
         private readonly UsuariosDbContext _usuariosDbContext;
         private readonly ProductosDbContext _productosDbContext;
         private readonly IFileConvertService _fileConvertService;
@@ -33,7 +33,7 @@ namespace Presentation.WebApp.Controllers
             _pacientesDbContext = new PacientesDbContext(configuration.GetConnectionString("DefaultConnection"));
             _servicioCitas = servicioCitas;
             _catalogosDbContext = new CatalogosDbContext(configuration.GetConnectionString("DefaultConnection"));
-            _doctoresDbContext = new DoctoresDbContext(configuration.GetConnectionString("DefaultConnection"));
+            _doctoresDbContext = new RepositorioDoctores(configuration.GetConnectionString("DefaultConnection"));
             _usuariosDbContext = new UsuariosDbContext(configuration.GetConnectionString("DefaultConnection"));
             _productosDbContext = new ProductosDbContext(configuration.GetConnectionString("DefaultConnection"));
             _fileConvertService = fileConvertService;

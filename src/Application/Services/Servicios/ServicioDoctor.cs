@@ -1,5 +1,6 @@
 ﻿using Application.IServicios;
 using Domain;
+using Domain.IRepositorios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,34 +11,37 @@ namespace Application.Servicios
 {
     public class ServicioDoctor : IServicioDoctor
     {
-        public ServicioDoctor()
+        private readonly IRepositorioDoctores _repositorioDoctores;
+        public ServicioDoctor(IRepositorioDoctores repositorioDoctores)
         {
-
+            _repositorioDoctores = repositorioDoctores;
         }
 
-        public Doctor ConsultarDetalleDoctor()
+        public Doctor ConsultarDetalleDoctor(Guid id)
         {
-            throw new NotImplementedException();
+            return _repositorioDoctores.ConsultarDetalleDoctorDb(id);
         }
 
         public List<Doctor> ConsultarDoctores()
         {
-            throw new NotImplementedException();
+            return _repositorioDoctores.ConsultarDoctoresDb();
         }
 
-        public void EditarDoctor()
+        public bool EditarDoctor(Doctor doctor)
         {
-            throw new NotImplementedException();
+            return _repositorioDoctores.EditarDoctorBd(doctor);
         }
 
-        public void EliminarDoctor()
+        public bool EliminarDoctor(Guid id)
         {
-            throw new NotImplementedException();
+            return _repositorioDoctores.EliminarDoctorBd(id);
         }
 
-        public void RegistrarDoctor()
+        public void RegistrarDoctor(Doctor doctor)
         {
-            throw new NotImplementedException();
+            _repositorioDoctores.GuardarDoctorBd(doctor);
         }
+
+
     }
 }

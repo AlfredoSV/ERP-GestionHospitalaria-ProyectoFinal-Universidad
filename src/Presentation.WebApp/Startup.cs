@@ -39,7 +39,8 @@ namespace Presentation.WebApp
             services.AddTransient<IServicioCitas, ServicioCita>();
             services.AddTransient<IServicioDoctor, ServicioDoctor>();
 
-            services.AddTransient<IRepositorioCitas, CitasDbContext>();
+            services.AddTransient<IRepositorioDoctores, RepositorioDoctores>();
+            services.AddTransient<IRepositorioCitas, RepositorioCitas>();
 
 
             services.ConfigureApplicationCookie(options =>
