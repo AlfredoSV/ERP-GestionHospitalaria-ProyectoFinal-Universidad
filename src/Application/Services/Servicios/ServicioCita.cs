@@ -38,13 +38,13 @@ namespace Application.Servicios
             return _repositorioCitas.EliminarCita(id);
         }
 
-        public List<Cita> ListarCitas()
+        public List<Cita> ConsultarCitas()
         {
             return _repositorioCitas.ListarCitas();
 
         }
 
-        public List<Cita> ListarCitasGraficas()
+        public List<Cita> ConsultarCitasGraficas()
         {
             return _repositorioCitas.ListarCitasGraficas();
         }

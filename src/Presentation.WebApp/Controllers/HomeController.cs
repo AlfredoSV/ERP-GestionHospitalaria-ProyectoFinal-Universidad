@@ -59,7 +59,7 @@ namespace Presentation.WebApp.Controllers
             ////////////////Por especialidad
             ///
 
-            var dataDoc = _servicioCitas.ListarCitasGraficas().GroupBy(info => info.EstatusCita)
+            var dataDoc = _servicioCitas.ConsultarCitasGraficas().GroupBy(info => info.EstatusCita)
                         .Select(group => new
                         {
                             Metric = group.Key,

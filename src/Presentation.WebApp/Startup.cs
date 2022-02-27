@@ -36,8 +36,11 @@ namespace Presentation.WebApp
             services.AddScoped(connectionString => Configuration.GetConnectionString("DefaultConnection"));
 
             services.AddTransient<IFileConvertService, FileConverterService>();
-            services.AddTransient<IRepositorioCitas, CitasDbContext>();
             services.AddTransient<IServicioCitas, ServicioCita>();
+            services.AddTransient<IServicioDoctor, ServicioDoctor>();
+
+            services.AddTransient<IRepositorioCitas, CitasDbContext>();
+
 
             services.ConfigureApplicationCookie(options =>
             {
