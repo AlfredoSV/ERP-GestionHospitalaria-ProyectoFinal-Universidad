@@ -42,6 +42,10 @@ namespace Presentation.WebApp
             services.AddTransient<IRepositorioDoctores, RepositorioDoctores>();
             services.AddTransient<IRepositorioCitas, RepositorioCitas>();
 
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+            });
 
             services.ConfigureApplicationCookie(options =>
             {
@@ -75,6 +79,9 @@ namespace Presentation.WebApp
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSession();
+
 
             app.UseRouting();
 
