@@ -23,6 +23,7 @@ function OnSuccess(response) {
         "pageLength": 2,
         processing: true,
 
+
         deferRender: true,
         scrollY: 500,
         scrollCollapse: true,
@@ -82,7 +83,7 @@ function OnSuccess(response) {
             },
             {
                 extend: 'print',
-                text: '<i class="fas fa-print"></i> Imprimir',
+                text: '<i class="fas fa-file-pdf"></i> Imprimir',
                 titleAttr: 'print',
                 className: 'btn-import',
                 exportOptions: {
@@ -100,7 +101,9 @@ function OnSuccess(response) {
 
         ],
         "language": {
-            "url": "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json"
+            "url": "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json",
+            processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '
+
         }
     });
 
@@ -110,43 +113,22 @@ function OnSuccess(response) {
 }
 
 const eliminar = (idCitaElimiar) => {
-    console.log(idCitaElimiar.data);
+
     alertify.confirm('Cancelar cita', 'A continuación cancelará esta cita, desea continuar?',
-        function () {
+        () => {
 
+            let data = {
+                id: idCitaElimiar.hash.replace('#', '')
 
-            $.ajax({
-                url: location.origin + "/Citas/CancelarCita", // Url
-                data: {
-                    id: idCitaElimiar.hash.replace('#', '')
-                    // ...
-                },
-                async: false,
-                type: "post"  // Verbo HTTP
-            })
-                // Se ejecuta si todo fue bien.
-                .done(function (result) {
-                    if (result != null) {
-                        alertify.success('La cita se canceló correctamente');
-                        listarCitas();
-                    }
-                    else {
-                    }
-                })
-                // Se ejecuta si se produjo un error.
-                .fail(function (xhr, status, error) {
+            };
+            consumirMetodoAccion("/Citas/CancelarCita", false, 'post', data, (result) => {
+                if (result != null) {
+                    alertify.success('La cita se canceló correctamente');
+                    listarCitas();
+                }
+            });
+        }, () => { alertify.error('No se canceló la cita') }
 
-                })
-                // Hacer algo siempre, haya sido exitosa o no.
-                .always(function () {
-
-                });
-
-
-        }
-        , function () {
-            /*alertify.error('Cancel') */
-        }
     ).set('labels', { ok: 'Sí', cancel: 'No' });
 }
 
@@ -292,6 +274,7 @@ const editarCita = (cita) => {
 }
 
 const enviarCitaEditada = function () {
+
     let datosCorrectos = true;
     let fecha = document.querySelector("#fecha");
 
@@ -309,7 +292,6 @@ const enviarCitaEditada = function () {
 
     let dataCita = {};
 
-
     dataCita.pacienteid = null;
     dataCita.idEstaus = document.querySelector("#estatus").value;
     dataCita.idArea = document.querySelector("#areatencion").value;
@@ -317,22 +299,10 @@ const enviarCitaEditada = function () {
     dataCita.observaciones = document.querySelector("#observaciones").value;
 
     if (datosCorrectos) {
-        $.ajax({
-            type: "POST",
-            url: location.origin + "/Citas/EditarCita",
-            data: { id: document.querySelector("#identificadorcita").value, dataCita },
-            async: false,
-            dataType: "json",
-            success: () => {
-                $('#exampleModal').modal('hide');
-            },
-            failure: function (response) {
 
-            },
-            error: function (response) {
+        let data = { id: document.querySelector("#identificadorcita").value, dataCita };
 
-            }
-        });
+        consumirMetodoAccion("/Citas/EditarCita", false, 'post', data, () => { $('#exampleModal').modal('hide') });
 
         $('#exampleModal').modal('hide');
         listarCitas();
