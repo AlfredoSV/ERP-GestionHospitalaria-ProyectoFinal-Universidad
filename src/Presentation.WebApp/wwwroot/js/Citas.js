@@ -5,7 +5,6 @@
 });
 
 function listarCitas() {
-
     consumirMetodoAccion("/Citas/ListarCitas", false, 'post', '{}', OnSuccess);
 }
 
@@ -29,8 +28,19 @@ function OnSuccess(response) {
         scrollCollapse: true,
         scroller: true,
         async: true,
+        /**/
 
-        data: response,
+        "serverSide": true,
+        "filter": true,
+        "ajax": {
+            "url": "/Citas/EjemploPagDataTables",
+            "type": "POST",
+            "datatype": "json"
+        },
+
+        /**/
+
+        //data: response,
         columns: [
             { 'data': 'id' },
             { 'data': 'nombrePaciente' },
@@ -119,7 +129,6 @@ const eliminar = (idCitaElimiar) => {
 
             let data = {
                 id: idCitaElimiar.hash.replace('#', '')
-
             };
             consumirMetodoAccion("/Citas/CancelarCita", false, 'post', data, (result) => {
                 if (result != null) {
