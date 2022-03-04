@@ -104,8 +104,8 @@ function OnSuccess(response) {
             {
 
                 text: '<i  class="fas fa-print"></i> Generar reporte',
-                titleAttr: 'print',
-                className: 'btn-import'
+                titleAttr: 'generarReporte',
+                className: 'btn-import',
 
             }
 

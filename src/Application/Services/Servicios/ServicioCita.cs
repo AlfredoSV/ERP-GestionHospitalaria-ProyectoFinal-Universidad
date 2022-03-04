@@ -38,9 +38,10 @@ namespace Application.Servicios
             return _repositorioCitas.EliminarCita(id);
         }
 
-        public List<Cita> ConsultarCitas()
+        public List<Cita> ConsultarCitas(int pagina, int tamanioPag)
         {
-            return _repositorioCitas.ListarCitas();
+
+            return _repositorioCitas.ListarCitas(pagina, tamanioPag);
 
         }
 

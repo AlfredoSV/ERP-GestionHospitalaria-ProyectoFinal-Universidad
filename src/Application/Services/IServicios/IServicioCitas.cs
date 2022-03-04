@@ -9,7 +9,7 @@ namespace Application.IServicios
 {
     public interface IServicioCitas
     {
-        public List<Cita> ConsultarCitas();
+        public List<Cita> ConsultarCitas(int pagina, int tamanioPag);
         Cita ConsultarDetalleCita(Guid id);
         List<Cita> ConsultarCitasGraficas();
         bool CrearNuevaCita(Cita cita);

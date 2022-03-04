@@ -8,7 +8,7 @@ namespace Domain.IRepositorios
 {
     public interface IRepositorioCitas
     {
-        List<Cita> ListarCitas();
+        List<Cita> ListarCitas(int pagina, int tamanioPag);
         List<Cita> ListarCitasGraficas();
         Cita ConsultarDetalleCita(Guid id);
         bool CrearNuevaCita(Cita data);
