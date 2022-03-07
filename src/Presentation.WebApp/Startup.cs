@@ -38,9 +38,11 @@ namespace Presentation.WebApp
             services.AddTransient<IFileConvertService, FileConverterService>();
             services.AddTransient<IServicioCitas, ServicioCita>();
             services.AddTransient<IServicioDoctor, ServicioDoctor>();
+            services.AddTransient<IServicioPaciente, ServicioPaciente>();
 
             services.AddTransient<IRepositorioDoctores, RepositorioDoctores>();
             services.AddTransient<IRepositorioCitas, RepositorioCitas>();
+            services.AddTransient<IRepositorioPacientes, RepositorioPacientes>();
 
             services.AddSession(options =>
             {

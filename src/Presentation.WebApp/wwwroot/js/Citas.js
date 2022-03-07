@@ -1,15 +1,16 @@
 ﻿$(document).ready(function () {
 
-    consumirMetodoAccion("/Citas/ListarCitas", false, 'post', '{}', OnSuccess);
+    consumirMetodoAccion("/Citas/ListarCitas", false, 'post', '{}', GnerarTablaCitas);
 
 });
 
 function listarCitas() {
-    consumirMetodoAccion("/Citas/ListarCitas", false, 'post', '{}', OnSuccess);
+
+    consumirMetodoAccion("/Citas/ListarCitas", false, 'post', '{}', GnerarTablaCitas);
 }
 
 
-function OnSuccess(response) {
+function GnerarTablaCitas(response) {
 
     $('#citasTabla').DataTable().clear().destroy();
 
