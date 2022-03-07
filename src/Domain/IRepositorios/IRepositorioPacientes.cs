@@ -8,6 +8,12 @@ namespace Domain.IRepositorios
 {
     public interface IRepositorioPacientes
     {
-       List<Paciente> ConsultarPacientes();
+        List<Paciente> Pacientes();
+        List<Paciente> PacientesPorProfesion();
+        Paciente DetallePaciente(Guid id);
+        Paciente DetalleGeneralPaciente(Guid id);
+        bool GuardarPaciente(Paciente paciente);
+        bool GuardarPacienteEditado(Guid id, Paciente paciente);
+        public bool EliminarPaciente(Guid id);
     }
 }

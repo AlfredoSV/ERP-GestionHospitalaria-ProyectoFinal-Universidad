@@ -22,15 +22,15 @@ namespace Presentation.WebApp.Controllers
         private readonly IServicioCitas _servicioCitas;
 
         private readonly CatalogosDbContext _catalogosDbContext;
-        private readonly RepositorioPacientes _pacientesDbContext;
+        private readonly IServicioPaciente _servicioPaciente;
         private readonly RepositorioDoctores _doctoresDbContext;
         private readonly UsuariosDbContext _usuariosDbContext;
         private readonly ProductosDbContext _productosDbContext;
         private readonly IFileConvertService _fileConvertService;
 
-        public HomeController(IConfiguration configuration, IFileConvertService fileConvertService, IServicioCitas servicioCitas)
+        public HomeController(IConfiguration configuration, IFileConvertService fileConvertService, IServicioCitas servicioCitas,IServicioPaciente servicioPaciente)
         {
-            _pacientesDbContext = new RepositorioPacientes(configuration.GetConnectionString("DefaultConnection"));
+            _servicioPaciente = servicioPaciente;
             _servicioCitas = servicioCitas;
             _catalogosDbContext = new CatalogosDbContext(configuration.GetConnectionString("DefaultConnection"));
             _doctoresDbContext = new RepositorioDoctores(configuration.GetConnectionString("DefaultConnection"));
@@ -44,7 +44,7 @@ namespace Presentation.WebApp.Controllers
         {
 
 
-            var data = _pacientesDbContext.List().GroupBy(info => info.EstadoCivil)
+            var data = _servicioPaciente.ConsultarPacientesBD().GroupBy(info => info.EstadoCivil)
                         .Select(group => new
                         {
                             Metric = _catalogosDbContext.ListCatEstadoCivil().Where(x => x.IdEstado == group.Key).Select(x => x.Nombre_Estado).FirstOrDefault(),
@@ -75,7 +75,7 @@ namespace Presentation.WebApp.Controllers
             ///////////////////////////////////////////////////////////
             ///
 
-            var dataPacS = _pacientesDbContext.ListSangre().GroupBy(info => info.NombreProfesion)
+            var dataPacS = _servicioPaciente.ConssultarPacientesPorProfesionBD().GroupBy(info => info.NombreProfesion)
                       .Select(group => new
                       {
                           Metric = group.Key,
@@ -151,7 +151,7 @@ namespace Presentation.WebApp.Controllers
                 }
                 else
                 {
-                    foto = _fileConvertService.ConvertToBase64(data.FotoFile.OpenReadStream());
+                    foto = _fileConvertService.ConvertirABase64(data.FotoFile.OpenReadStream());
                 }
                 data.FotoT = foto;
                 var seActualizo = _usuariosDbContext.EditarMisDatos(data, userName);
