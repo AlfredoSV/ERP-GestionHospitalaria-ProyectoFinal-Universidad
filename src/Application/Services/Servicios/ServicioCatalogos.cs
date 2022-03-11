@@ -17,35 +17,35 @@ namespace Application.Servicios
             _repositorioCatalogos = repositorioCatalogos;
         }
 
-        public List<CatalogoAreasMedicas> ConsultarCatalogoAreaMedicaBd()
+        public List<CatalogoAreasMedicas> ConsultarCatalogoAreaMedica()
         {
-            return _repositorioCatalogos.ListCatMed();
+            return _repositorioCatalogos.ListCatalogoAreaMedica();
         }
 
-        public List<CatalogoEstadoCivil> ConsultarCatalogoEstadoCivilBd()
+        public List<CatalogoEstadoCivil> ConsultarCatalogoEstadoCivil()
         {
-            return _repositorioCatalogos.ListCatEstadoCivil();
+            return _repositorioCatalogos.ListCatalogoEstadoCivil();
         }
 
-        public List<CatalogoEstatusCitas> ConsultarCatalogoEstatusCitasBd()
+        public List<CatalogoEstatusCitas> ConsultarCatalogoEstatusCitas()
         {
-            return _repositorioCatalogos.ListCatEst();
+            return _repositorioCatalogos.ListCatalogoEstatusCitas();
         }
 
-        public List<CatalogoProfesiones> ConsultarCatalogoProfesionesBd()
+        public List<CatalogoProfesiones> ConsultarCatalogoProfesiones()
         {
-            return _repositorioCatalogos.ListCatProfesion();
+            return _repositorioCatalogos.ListCatalogoProfesion();
         }
 
-        public List<CatalogoTiposSagre> ConsultarCatalogoTiposSangreBd()
+        public List<CatalogoTiposSagre> ConsultarCatalogoTiposSangre()
         {
-            return _repositorioCatalogos.ListCatTiposSangre();
+            return _repositorioCatalogos.ListCatalogoTiposSangre();
 
         }
 
-        public List<CatalogoTipoProducto> ConsultarTiposProductosBd()
+        public List<CatalogoTipoProducto> ConsultarTiposProductos()
         {
-            return _repositorioCatalogos.ListCatTipoProductos();
+            return _repositorioCatalogos.ListCatalogoTipoProductos();
         }
     }
 }

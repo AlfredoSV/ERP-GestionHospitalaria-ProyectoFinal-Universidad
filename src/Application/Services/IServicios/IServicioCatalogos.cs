@@ -9,17 +9,17 @@ namespace Application.IServicios
 {
     public interface IServicioCatalogos
     {
-        public List<CatalogoEstatusCitas> ConsultarCatalogoEstatusCitasBd();
+        public List<CatalogoEstatusCitas> ConsultarCatalogoEstatusCitas();
 
-        public List<CatalogoAreasMedicas> ConsultarCatalogoAreaMedicaBd();
+        public List<CatalogoAreasMedicas> ConsultarCatalogoAreaMedica();
 
-        public List<CatalogoEstadoCivil> ConsultarCatalogoEstadoCivilBd();
+        public List<CatalogoEstadoCivil> ConsultarCatalogoEstadoCivil();
 
-        public List<CatalogoTiposSagre> ConsultarCatalogoTiposSangreBd();
+        public List<CatalogoTiposSagre> ConsultarCatalogoTiposSangre();
 
-        public List<CatalogoProfesiones> ConsultarCatalogoProfesionesBd();
+        public List<CatalogoProfesiones> ConsultarCatalogoProfesiones();
 
-        public List<CatalogoTipoProducto> ConsultarTiposProductosBd();
+        public List<CatalogoTipoProducto> ConsultarTiposProductos();
         
     }
 }

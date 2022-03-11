@@ -21,18 +21,18 @@ namespace Presentation.WebApp.Controllers
     {
         private readonly IServicioCitas _servicioCitas;
 
-        private readonly RepositorioCatalogos _catalogosDbContext;
+        private readonly IServicioCatalogos _servicioCatalogos;
         private readonly IServicioPaciente _servicioPaciente;
         private readonly RepositorioDoctores _doctoresDbContext;
         private readonly UsuariosDbContext _usuariosDbContext;
         private readonly ProductosDbContext _productosDbContext;
         private readonly IFileConvertService _fileConvertService;
 
-        public HomeController(IConfiguration configuration, IFileConvertService fileConvertService, IServicioCitas servicioCitas,IServicioPaciente servicioPaciente)
+        public HomeController(IConfiguration configuration, IFileConvertService fileConvertService, IServicioCitas servicioCitas,IServicioPaciente servicioPaciente,IServicioCatalogos servicioCatalogos)
         {
             _servicioPaciente = servicioPaciente;
             _servicioCitas = servicioCitas;
-            _catalogosDbContext = new RepositorioCatalogos(configuration.GetConnectionString("DefaultConnection"));
+            _servicioCatalogos = servicioCatalogos;
             _doctoresDbContext = new RepositorioDoctores(configuration.GetConnectionString("DefaultConnection"));
             _usuariosDbContext = new UsuariosDbContext(configuration.GetConnectionString("DefaultConnection"));
             _productosDbContext = new ProductosDbContext(configuration.GetConnectionString("DefaultConnection"));
@@ -47,7 +47,7 @@ namespace Presentation.WebApp.Controllers
             var data = _servicioPaciente.ConsultarPacientesBD().GroupBy(info => info.EstadoCivil)
                         .Select(group => new
                         {
-                            Metric = _catalogosDbContext.ListCatEstadoCivil().Where(x => x.IdEstado == group.Key).Select(x => x.Nombre_Estado).FirstOrDefault(),
+                            Metric = _servicioCatalogos.ConsultarCatalogoEstadoCivil().Where(x => x.IdEstado == group.Key).Select(x => x.Nombre_Estado).FirstOrDefault(),
                             Count = group.Count()
                         })
                         .OrderBy(x => x.Metric);
@@ -112,7 +112,7 @@ namespace Presentation.WebApp.Controllers
             ViewBag.seActualizo = null;
             List<SelectListItem> listaEstadosCiviles = new List<SelectListItem>();
 
-            foreach (var estado in _catalogosDbContext.ListCatEstadoCivil())
+            foreach (var estado in _servicioCatalogos.ConsultarCatalogoEstadoCivil())
             {
                 listaEstadosCiviles.Add(new SelectListItem { Value = estado.IdEstado.ToString(), Text = estado.Nombre_Estado });
             }
@@ -136,7 +136,7 @@ namespace Presentation.WebApp.Controllers
         {
             List<SelectListItem> listaEstadosCiviles = new List<SelectListItem>();
 
-            foreach (var estado in _catalogosDbContext.ListCatEstadoCivil())
+            foreach (var estado in _servicioCatalogos.ConsultarCatalogoEstadoCivil())
             {
                 listaEstadosCiviles.Add(new SelectListItem { Value = estado.IdEstado.ToString(), Text = estado.Nombre_Estado });
             }
