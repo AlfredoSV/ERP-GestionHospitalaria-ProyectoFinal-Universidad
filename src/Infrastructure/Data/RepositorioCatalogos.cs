@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.IRepositorios;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,15 +7,15 @@ using System.Data.SqlClient;
 
 namespace Infrastructure
 {
-    public class CatalogosDbContext
+    public class RepositorioCatalogos : IRepositorioCatalogos
     {
         private readonly string _connectionString;
 
-        public CatalogosDbContext(string connectionString)
+        public RepositorioCatalogos(string connectionString)
         {
             _connectionString = connectionString;
         }
-        public List<CatalogoEstatusCitas> ListCatEst()
+        public List<CatalogoEstatusCitas> ListCatalogoEstatusCitas()
         {
             var data = new List<CatalogoEstatusCitas>();
 
@@ -46,7 +47,7 @@ namespace Infrastructure
             }
         }
 
-        public List<CatalogoAreasMedicas> ListCatMed()
+        public List<CatalogoAreasMedicas> ListCatalogoAreaMedica()
         {
             var data = new List<CatalogoAreasMedicas>();
 
@@ -78,7 +79,7 @@ namespace Infrastructure
             }
         }
 
-        public List<CatalogoEstadoCivil> ListCatEstadoCivil()
+        public List<CatalogoEstadoCivil> ListCatalogoEstadoCivil()
         {
             var data = new List<CatalogoEstadoCivil>();
 
@@ -109,7 +110,7 @@ namespace Infrastructure
             }
         }
 
-        public List<CatalogoTiposSagre> ListCatTiposSangre()
+        public List<CatalogoTiposSagre> ListCatalogoTiposSangre()
         {
             var data = new List<CatalogoTiposSagre>();
 
@@ -140,7 +141,7 @@ namespace Infrastructure
             }
         }
 
-        public List<CatalogoProfesiones> ListCatProfesion()
+        public List<CatalogoProfesiones> ListCatalogoProfesion()
         {
             var data = new List<CatalogoProfesiones>();
 
@@ -171,7 +172,7 @@ namespace Infrastructure
             }
         }
 
-        public List<CatalogoTipoProducto> ListCatTipoProductos()
+        public List<CatalogoTipoProducto> ListCatalogoTipoProductos()
         {
             var data = new List<CatalogoTipoProducto>();
 

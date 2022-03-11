@@ -21,7 +21,7 @@ namespace Presentation.WebApp.Controllers
     {
         private readonly IServicioCitas _servicioCitas;
 
-        private readonly CatalogosDbContext _catalogosDbContext;
+        private readonly RepositorioCatalogos _catalogosDbContext;
         private readonly IServicioPaciente _servicioPaciente;
         private readonly RepositorioDoctores _doctoresDbContext;
         private readonly UsuariosDbContext _usuariosDbContext;
@@ -32,7 +32,7 @@ namespace Presentation.WebApp.Controllers
         {
             _servicioPaciente = servicioPaciente;
             _servicioCitas = servicioCitas;
-            _catalogosDbContext = new CatalogosDbContext(configuration.GetConnectionString("DefaultConnection"));
+            _catalogosDbContext = new RepositorioCatalogos(configuration.GetConnectionString("DefaultConnection"));
             _doctoresDbContext = new RepositorioDoctores(configuration.GetConnectionString("DefaultConnection"));
             _usuariosDbContext = new UsuariosDbContext(configuration.GetConnectionString("DefaultConnection"));
             _productosDbContext = new ProductosDbContext(configuration.GetConnectionString("DefaultConnection"));

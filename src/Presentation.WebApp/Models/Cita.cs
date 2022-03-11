@@ -17,6 +17,7 @@ namespace Presentation.WebApp.Models
         [Required(ErrorMessage ="El campo Area médica es requerido")]
         public Guid idArea { get; set; }
         [Required(ErrorMessage = "El campo Fecha es requerido")]
+
         public DateTime Fecha { get; set; }
 
         [Required(ErrorMessage = "El campo Observaciones es requerido")]

@@ -39,10 +39,12 @@ namespace Presentation.WebApp
             services.AddTransient<IServicioCitas, ServicioCita>();
             services.AddTransient<IServicioDoctor, ServicioDoctor>();
             services.AddTransient<IServicioPaciente, ServicioPaciente>();
+            services.AddTransient<IServicioCatalogos, ServicioCatalogos>();
 
             services.AddTransient<IRepositorioDoctores, RepositorioDoctores>();
             services.AddTransient<IRepositorioCitas, RepositorioCitas>();
             services.AddTransient<IRepositorioPacientes, RepositorioPacientes>();
+            services.AddTransient<IRepositorioCatalogos, RepositorioCatalogos>();
 
             services.AddSession(options =>
             {
