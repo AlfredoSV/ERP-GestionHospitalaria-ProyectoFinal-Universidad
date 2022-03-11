@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using Application.Dtos;
+using Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,14 @@ namespace Application.IServicios
 {
     public interface IServicioPaciente
     {
-        public List<Paciente> ConsultarPacientesBD();
-        public List<Paciente> ConssultarPacientesPorProfesionBD();
-        public Paciente ConsultarDetallePacienteBD(Guid id);
-        public Paciente ConsultarDetalleGeneralPacienteBD(Guid id);
-        public bool GuardarNuevoPacienteBD(Paciente paciente);
-        public bool GuardarNuevoPacienteEditadoBD(Guid id, Paciente paciente);
-        public bool EliminarPacienteBD(Guid id);
+        IEnumerable<DtoGrafica> ConsultarPacientesPorEstadoCivil();
+        List<Paciente> ConsultarPacientesBD();
+        List<Paciente> ConssultarPacientesPorProfesionBD();
+        Paciente ConsultarDetallePacienteBD(Guid id);
+        Paciente ConsultarDetalleGeneralPacienteBD(Guid id);
+        bool GuardarNuevoPacienteBD(Paciente paciente);
+        bool GuardarNuevoPacienteEditadoBD(Guid id, Paciente paciente);
+        bool EliminarPacienteBD(Guid id);
 
 
     }

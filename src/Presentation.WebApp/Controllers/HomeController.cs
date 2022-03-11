@@ -43,14 +43,7 @@ namespace Presentation.WebApp.Controllers
         public IActionResult Index()
         {
 
-
-            var data = _servicioPaciente.ConsultarPacientesBD().GroupBy(info => info.EstadoCivil)
-                        .Select(group => new
-                        {
-                            Metric = _servicioCatalogos.ConsultarCatalogoEstadoCivil().Where(x => x.IdEstado == group.Key).Select(x => x.Nombre_Estado).FirstOrDefault(),
-                            Count = group.Count()
-                        })
-                        .OrderBy(x => x.Metric);
+            var data = _servicioPaciente.ConsultarPacientesPorEstadoCivil();
             // ToDo
             ViewBag.EstadosCiviles = data.Select(x => x.Metric);
 

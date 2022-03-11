@@ -1,4 +1,5 @@
-﻿using Application.IServicios;
+﻿using Application.Dtos;
+using Application.IServicios;
 using Domain;
 using Domain.IRepositorios;
 using System;
@@ -14,9 +15,11 @@ namespace Application.Servicios
     public class ServicioPaciente : IServicioPaciente
     {
         private readonly IRepositorioPacientes _repositorioPacientes;
-        public ServicioPaciente(IRepositorioPacientes repositorioPacientes)
+        private readonly IServicioCatalogos _servicioCatalogos;
+        public ServicioPaciente(IRepositorioPacientes repositorioPacientes,IServicioCatalogos servicioCatalogos)
         {
             _repositorioPacientes = repositorioPacientes;
+            _servicioCatalogos = servicioCatalogos;
         }
 
         public List<Paciente> ConssultarPacientesPorProfesionBD()
@@ -34,8 +37,19 @@ namespace Application.Servicios
             return _repositorioPacientes.DetallePaciente(id);
         }
 
+        public IEnumerable<DtoGrafica> ConsultarPacientesPorEstadoCivil()
+        {
+            return  _repositorioPacientes.Pacientes().GroupBy(info => info.EstadoCivil)
+                       .Select(group => new DtoGrafica
+                       {
+                           Metric = _servicioCatalogos.ConsultarCatalogoEstadoCivil().Where(x => x.IdEstado == group.Key).Select(x => x.Nombre_Estado).FirstOrDefault(),
+                           Count = group.Count()
+                       })
+                       .OrderBy(x => x.Metric);
+        }
         public List<Paciente> ConsultarPacientesBD()
         {
+            
             return _repositorioPacientes.Pacientes();
         }
 
