@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.IRepositorios;
 using Domain;
+using Application.Dtos;
 
 namespace Application.Servicios
 {
@@ -45,9 +46,15 @@ namespace Application.Servicios
 
         }
 
-        public List<Cita> ConsultarCitasGraficas()
+        public IEnumerable<DtoGrafica> ConsultarCitasGraficas()
         {
-            return _repositorioCitas.ListarCitasGraficas();
+            return _repositorioCitas.ListarCitasGraficas().GroupBy(info => info.EstatusCita)
+                        .Select(group => new DtoGrafica
+                        {
+                            Metrica = group.Key,
+                            Total = group.Count()
+                        })
+                        .OrderBy(x => x.Metrica); 
         }
 
 

@@ -22,9 +22,15 @@ namespace Application.Servicios
             _servicioCatalogos = servicioCatalogos;
         }
 
-        public List<Paciente> ConssultarPacientesPorProfesionBD()
+        public IEnumerable<DtoGrafica> ConsultarPacientesPorProfesion()
         {
-            return _repositorioPacientes.PacientesPorProfesion();
+            return _repositorioPacientes.PacientesPorProfesion().GroupBy(info => info.NombreProfesion)
+                      .Select(group => new DtoGrafica
+                      {
+                          Metrica = group.Key,
+                          Total = group.Count()
+                      })
+                      .OrderBy(x => x.Metrica); ;
         }
 
         public Paciente ConsultarDetalleGeneralPacienteBD(Guid id)
@@ -42,10 +48,10 @@ namespace Application.Servicios
             return  _repositorioPacientes.Pacientes().GroupBy(info => info.EstadoCivil)
                        .Select(group => new DtoGrafica
                        {
-                           Metric = _servicioCatalogos.ConsultarCatalogoEstadoCivil().Where(x => x.IdEstado == group.Key).Select(x => x.Nombre_Estado).FirstOrDefault(),
-                           Count = group.Count()
+                           Metrica = _servicioCatalogos.ConsultarCatalogoEstadoCivil().Where(x => x.IdEstado == group.Key).Select(x => x.Nombre_Estado).FirstOrDefault(),
+                           Total = group.Count()
                        })
-                       .OrderBy(x => x.Metric);
+                       .OrderBy(x => x.Metrica);
         }
         public List<Paciente> ConsultarPacientesBD()
         {

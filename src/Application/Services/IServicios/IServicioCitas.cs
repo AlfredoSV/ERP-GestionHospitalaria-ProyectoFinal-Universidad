@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using Application.Dtos;
+using Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Application.IServicios
     {
         public List<Cita> ConsultarCitas(int pagina, int tamanioPag);
         Cita ConsultarDetalleCita(Guid id);
-        List<Cita> ConsultarCitasGraficas();
+        IEnumerable<DtoGrafica> ConsultarCitasGraficas();
         bool CrearNuevaCita(Cita cita);
         bool EditarCita(Guid id, Cita cita);
         bool EliminarCita(Guid id);

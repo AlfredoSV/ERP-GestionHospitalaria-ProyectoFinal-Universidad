@@ -8,7 +8,7 @@ namespace Application.Dtos
 {
     public class DtoGrafica
     {
-        public string Metric { get; set; }
-        public int Count { get; set; }
+        public string Metrica { get; set; }
+        public int Total { get; set; }
     }
 }

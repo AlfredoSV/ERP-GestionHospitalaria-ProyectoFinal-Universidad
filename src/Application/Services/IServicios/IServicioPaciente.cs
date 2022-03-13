@@ -12,7 +12,7 @@ namespace Application.IServicios
     {
         IEnumerable<DtoGrafica> ConsultarPacientesPorEstadoCivil();
         List<Paciente> ConsultarPacientesBD();
-        List<Paciente> ConssultarPacientesPorProfesionBD();
+        IEnumerable<DtoGrafica> ConsultarPacientesPorProfesion();
         Paciente ConsultarDetallePacienteBD(Guid id);
         Paciente ConsultarDetalleGeneralPacienteBD(Guid id);
         bool GuardarNuevoPacienteBD(Paciente paciente);
