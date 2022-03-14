@@ -40,11 +40,14 @@ namespace Presentation.WebApp
             services.AddTransient<IServicioDoctor, ServicioDoctor>();
             services.AddTransient<IServicioPaciente, ServicioPaciente>();
             services.AddTransient<IServicioCatalogos, ServicioCatalogos>();
+            var config = Configuration.GetSection("Smtp");
+            services.AddTransient<IServicioSmtpCorreo>(x =>   new ServicioSmtpCorreo(config["Displayname"], config["Address"], config["Host"], int.Parse(config["Port"]), config["Username"], config["Password"]));
 
             services.AddTransient<IRepositorioDoctores, RepositorioDoctores>();
             services.AddTransient<IRepositorioCitas, RepositorioCitas>();
             services.AddTransient<IRepositorioPacientes, RepositorioPacientes>();
             services.AddTransient<IRepositorioCatalogos, RepositorioCatalogos>();
+            
 
             services.AddSession(options =>
             {

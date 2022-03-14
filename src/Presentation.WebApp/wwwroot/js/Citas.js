@@ -20,7 +20,7 @@ function GnerarTablaCitas(response) {
         "searching": true,
         "lengthChange": true,
 
-        "pageLength": 2,
+        "pageLength": 15,
         processing: true,
 
 
@@ -55,58 +55,15 @@ function GnerarTablaCitas(response) {
             }
         ],
         dom: 'Bfrtip',
-        buttons: [
-            {
-                extend: 'copyHtml5',
-                text: '<i class="far fa-copy"></i> Copiar',
-                titleAttr: 'Copy',
-                className: 'btn-import',
-                exportOptions: {
-                    columns: [0, 1, 2, 4]
-                }
-            },
-            {
-                extend: 'excelHtml5',
-                text: '<i class="fas fa-table"></i> Excel',
-                titleAttr: 'Excel',
-                className: 'btn-import',
-                exportOptions: {
-                    columns: [0, 1, 2, 4]
-                }
-            },
-            {
-                extend: 'csvHtml5',
-                text: '<i class="fas fa-file-csv"></i> CVS',
-                titleAttr: 'CSV',
-                className: 'btn-import', exportOptions: {
-                    columns: [0, 1, 2, 4]
-                }
-            },
-            {
-                extend: 'pdfHtml5',
-                text: '<i class="fas fa-file-pdf"></i> PDF',
-                titleAttr: 'PDF',
-                className: 'btn-import',
-                exportOptions: {
-                    columns: [0, 1, 2, 4]
-                }
-
-            },
-            {
-                extend: 'print',
-                text: '<i class="fas fa-file-pdf"></i> Imprimir',
-                titleAttr: 'print',
-                className: 'btn-import',
-                exportOptions: {
-                    columns: [0, 1, 2, 4]
-                }
-
-            },
+        buttons: [         
             {
 
-                text: '<i  class="fas fa-print"></i> Generar reporte',
+                text: '<i class="fas fa-file-pdf"></i> Generar reporte',
                 titleAttr: 'generarReporte',
                 className: 'btn-import',
+                action: function (e, dt, node, config) {
+                    consumirMetodoAccion("/Citas/GenerarReporte", false,"POST",null,null)
+                }
 
             }
 
