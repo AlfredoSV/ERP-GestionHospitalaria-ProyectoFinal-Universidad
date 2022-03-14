@@ -90,25 +90,17 @@ namespace Presentation.WebApp.Controllers
         [HttpGet]
         public IActionResult MisDatos()
         {
-            ViewBag.seActualizo = null;
-            List<SelectListItem> listaEstadosCiviles = new List<SelectListItem>();
-
-            foreach (var estado in _servicioCatalogos.ConsultarCatalogoEstadoCivil())
-            {
-                listaEstadosCiviles.Add(new SelectListItem { Value = estado.IdEstado.ToString(), Text = estado.Nombre_Estado });
-            }
-            ViewBag.estadosCiviles = listaEstadosCiviles;
+            Catalogos();
             string userName = HttpContext.User.Identity.Name;
-
-
+            
             return View("MisDatos", _usuariosDbContext.Deatail(userName));
         }
 
         [HttpPost]
-        public IActionResult CambiarRol(string username, string rol)
+        public IActionResult CambiarRol(string usuario, string rol)
         {
 
-            var seActualizo = _usuariosDbContext.CambiarRol(username, rol);
+            var seActualizo = _usuariosDbContext.CambiarRol(usuario, rol);
 
             return Json(seActualizo);
         }
@@ -132,10 +124,6 @@ namespace Presentation.WebApp.Controllers
             return View("MisDatos", _usuariosDbContext.Deatail(usuario));
 
         }
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -153,6 +141,7 @@ namespace Presentation.WebApp.Controllers
             }
 
             ViewBag.estadosCiviles = listaEstadosCiviles;
+
         }
     }
 }
