@@ -6,23 +6,24 @@ using System.Linq;
 using System.Threading.Tasks;
 using Infrastructure;
 using Microsoft.Extensions.Configuration;
+using Application.IServicios;
 
 namespace Presentation.WebApp.Controllers
 {
     [Authorize(Roles ="Admin")]
     public class UsuariosController : Controller
     {
-        private readonly UsuariosDbContext _usuariosDbContext;
-        public UsuariosController(IConfiguration configuration)
+        private readonly IServicioUsuarios _servicioUsuarios;
+        public UsuariosController(IConfiguration configuration, IServicioUsuarios servicioUsuarios)
         {
-            _usuariosDbContext = new UsuariosDbContext(configuration.GetConnectionString("DefaultConnection"));
+            _servicioUsuarios = servicioUsuarios;
             
         }
 
         public IActionResult Index()
         {
             
-            return View(_usuariosDbContext.List());
+            return View(_servicioUsuarios.ListarUsuarios());
         }
     }
 }

@@ -9,6 +9,7 @@ using Infrastructure;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using Application.IServicios;
+using Domain.IRepositorios;
 
 namespace Presentation.WebApp.Controllers
 {
@@ -20,17 +21,17 @@ namespace Presentation.WebApp.Controllers
         private readonly IServicioCatalogos _servicioCatalogos;
         private readonly IServicioPaciente _servicioPaciente;
         private readonly RepositorioDoctores _doctoresDbContext;
-        private readonly UsuariosDbContext _usuariosDbContext;
+        private readonly IServicioUsuarios _servicioUsuarios;
         private readonly ProductosDbContext _productosDbContext;
         private readonly IFileConvertService _fileConvertService;
 
-        public HomeController(IConfiguration configuration, IFileConvertService fileConvertService, IServicioCitas servicioCitas, IServicioPaciente servicioPaciente, IServicioCatalogos servicioCatalogos)
+        public HomeController(IConfiguration configuration, IFileConvertService fileConvertService, IServicioCitas servicioCitas, IServicioPaciente servicioPaciente, IServicioCatalogos servicioCatalogos, IServicioUsuarios servicioUsuarios)
         {
             _servicioPaciente = servicioPaciente;
             _servicioCitas = servicioCitas;
             _servicioCatalogos = servicioCatalogos;
             _doctoresDbContext = new RepositorioDoctores(configuration.GetConnectionString("DefaultConnection"));
-            _usuariosDbContext = new UsuariosDbContext(configuration.GetConnectionString("DefaultConnection"));
+            _servicioUsuarios = servicioUsuarios;
             _productosDbContext = new ProductosDbContext(configuration.GetConnectionString("DefaultConnection"));
             _fileConvertService = fileConvertService;
         }
@@ -87,16 +88,16 @@ namespace Presentation.WebApp.Controllers
         public IActionResult MisDatos()
         {
             Catalogos();
-            string userName = HttpContext.User.Identity.Name;
+            string nombreUsuario = HttpContext.User.Identity.Name;
             
-            return View("MisDatos", _usuariosDbContext.Deatail(userName));
+            return View("MisDatos", _servicioUsuarios.DetalleUsuario(nombreUsuario));
         }
 
         [HttpPost]
         public IActionResult CambiarRol(string usuario, string rol)
         {
 
-            var seActualizo = _usuariosDbContext.CambiarRol(usuario, rol);
+            var seActualizo = _servicioUsuarios.ActualizarRolDeUsuario(usuario, rol);
 
             return Json(seActualizo);
         }
@@ -108,16 +109,16 @@ namespace Presentation.WebApp.Controllers
             
             if (ModelState.IsValid)
             {
-                data.FotoT = data.FotoFile == null ? _usuariosDbContext.Deatail(usuario).FotoT : _fileConvertService.ConvertirABase64(data.FotoFile.OpenReadStream()); ;
+                data.FotoT = data.FotoFile == null ? _servicioUsuarios.DetalleUsuario(usuario).FotoT : _fileConvertService.ConvertirABase64(data.FotoFile.OpenReadStream()); ;
                 
-                var seActualizo = _usuariosDbContext.EditarMisDatos(data, usuario);
+                var seActualizo = _servicioUsuarios.ActualizarDatosUsuario(data, usuario);
 
                 ViewBag.seActualizo = seActualizo;
 
-                return View("MisDatos", _usuariosDbContext.Deatail(usuario));
+                return View("MisDatos", _servicioUsuarios.DetalleUsuario(usuario));
             }
 
-            return View("MisDatos", _usuariosDbContext.Deatail(usuario));
+            return View("MisDatos", _servicioUsuarios.DetalleUsuario(usuario));
 
         }
 

@@ -1,12 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,6 +34,7 @@ namespace Presentation.WebApp
             services.AddTransient<IServicioDoctor, ServicioDoctor>();
             services.AddTransient<IServicioPaciente, ServicioPaciente>();
             services.AddTransient<IServicioCatalogos, ServicioCatalogos>();
+            services.AddTransient<IServicioUsuarios, ServicioUsuarios>();
             var config = Configuration.GetSection("Smtp");
             services.AddTransient<IServicioSmtpCorreo>(x =>   new ServicioSmtpCorreo(config["Displayname"], config["Address"], config["Host"], int.Parse(config["Port"]), config["Username"], config["Password"]));
 
@@ -47,6 +42,7 @@ namespace Presentation.WebApp
             services.AddTransient<IRepositorioCitas, RepositorioCitas>();
             services.AddTransient<IRepositorioPacientes, RepositorioPacientes>();
             services.AddTransient<IRepositorioCatalogos, RepositorioCatalogos>();
+            services.AddTransient<IRepositorioUsuarios, RepositorioUsuarios>();
             
 
             services.AddSession(options =>
