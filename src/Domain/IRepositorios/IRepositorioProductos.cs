@@ -10,8 +10,8 @@ namespace Domain.IRepositorios
     {
         List<Producto> ConsultarProductos();
         Producto ConsultarDetalleProductoPorId(Guid id);
-        bool InsertarProducto(Producto data);
-        bool EditarProducto(Producto data);
+        bool InsertarProducto(Producto producto);
+        bool EditarProducto(Producto producto);
         bool EliminarProductoPorId(Guid id);
     }
 }
