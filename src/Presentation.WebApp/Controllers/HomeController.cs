@@ -22,7 +22,7 @@ namespace Presentation.WebApp.Controllers
         private readonly IServicioPaciente _servicioPaciente;
         private readonly RepositorioDoctores _doctoresDbContext;
         private readonly IServicioUsuarios _servicioUsuarios;
-        private readonly ProductosDbContext _productosDbContext;
+        private readonly RepositorioProductos _productosDbContext;
         private readonly IFileConvertService _fileConvertService;
 
         public HomeController(IConfiguration configuration, IFileConvertService fileConvertService, IServicioCitas servicioCitas, IServicioPaciente servicioPaciente, IServicioCatalogos servicioCatalogos, IServicioUsuarios servicioUsuarios)
@@ -32,7 +32,7 @@ namespace Presentation.WebApp.Controllers
             _servicioCatalogos = servicioCatalogos;
             _doctoresDbContext = new RepositorioDoctores(configuration.GetConnectionString("DefaultConnection"));
             _servicioUsuarios = servicioUsuarios;
-            _productosDbContext = new ProductosDbContext(configuration.GetConnectionString("DefaultConnection"));
+            _productosDbContext = new RepositorioProductos(configuration.GetConnectionString("DefaultConnection"));
             _fileConvertService = fileConvertService;
         }
 

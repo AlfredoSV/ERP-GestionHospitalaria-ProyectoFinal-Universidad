@@ -9,13 +9,13 @@ namespace Infrastructure.Test
 {
     public class PruebaUnitariaInfraestructura
     {
-        private readonly ProductosDbContext _productosDbContext;
+        private readonly RepositorioProductos _productosDbContext;
         private readonly RepositorioCatalogos _catalogosDbContext;
         private readonly RepositorioCitas _citasDbContext;
         private string sqlConeccion = "Data Source=im01.database.windows.net;Initial Catalog=db;Persist Security Info=True;User ID=AdminDb;Password=P@$$w0rd";
         public PruebaUnitariaInfraestructura()
         {
-            _productosDbContext = new ProductosDbContext(sqlConeccion);
+            _productosDbContext = new RepositorioProductos(sqlConeccion);
             _catalogosDbContext = new RepositorioCatalogos(sqlConeccion);
             _citasDbContext = new RepositorioCitas(sqlConeccion);
         }
