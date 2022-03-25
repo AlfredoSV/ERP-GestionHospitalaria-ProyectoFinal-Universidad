@@ -36,6 +36,7 @@ namespace Presentation.WebApp
             services.AddTransient<IServicioCatalogos, ServicioCatalogos>();
             services.AddTransient<IServicioUsuarios, ServicioUsuarios>();
             services.AddTransient<IServicioProducto, ServicioProducto>();
+
             var config = Configuration.GetSection("Smtp");
             services.AddTransient<IServicioSmtpCorreo>(x =>   new ServicioSmtpCorreo(config["Displayname"], config["Address"], config["Host"], int.Parse(config["Port"]), config["Username"], config["Password"]));
 

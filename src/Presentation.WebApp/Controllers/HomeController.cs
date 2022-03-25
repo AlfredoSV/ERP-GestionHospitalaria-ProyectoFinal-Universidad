@@ -22,17 +22,17 @@ namespace Presentation.WebApp.Controllers
         private readonly IServicioPaciente _servicioPaciente;
         private readonly RepositorioDoctores _doctoresDbContext;
         private readonly IServicioUsuarios _servicioUsuarios;
-        private readonly RepositorioProductos _productosDbContext;
+        private readonly IServicioProducto _servicioProducto;
         private readonly IFileConvertService _fileConvertService;
 
-        public HomeController(IConfiguration configuration, IFileConvertService fileConvertService, IServicioCitas servicioCitas, IServicioPaciente servicioPaciente, IServicioCatalogos servicioCatalogos, IServicioUsuarios servicioUsuarios)
+        public HomeController(IConfiguration configuration, IFileConvertService fileConvertService, IServicioCitas servicioCitas, IServicioPaciente servicioPaciente, IServicioCatalogos servicioCatalogos, IServicioUsuarios servicioUsuarios,IServicioProducto servicioProducto)
         {
             _servicioPaciente = servicioPaciente;
             _servicioCitas = servicioCitas;
             _servicioCatalogos = servicioCatalogos;
             _doctoresDbContext = new RepositorioDoctores(configuration.GetConnectionString("DefaultConnection"));
             _servicioUsuarios = servicioUsuarios;
-            _productosDbContext = new RepositorioProductos(configuration.GetConnectionString("DefaultConnection"));
+            _servicioProducto = servicioProducto;
             _fileConvertService = fileConvertService;
         }
 
@@ -68,7 +68,7 @@ namespace Presentation.WebApp.Controllers
 
             ////////////////////////////////////////////////////
             ///
-            var dataTipoPro = _productosDbContext.List().GroupBy(info => info.NombreTipo)
+            var dataTipoPro = _servicioProducto.ConsultarProductos().GroupBy(info => info.NombreTipo)
           .Select(group => new
           {
               Metric = group.Key,
