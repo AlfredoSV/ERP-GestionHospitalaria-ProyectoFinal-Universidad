@@ -1,0 +1,33 @@
+﻿@{
+    Layout = null;
+}
+
+@model List<Domain.Cita>
+
+
+<h1>Reporte Citas</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cita in Model)
+        {
+            <tr>
+                <td>
+                    @cita.NombrePaciente
+                </td>
+                <td>
+                    @cita.Fecha
+                </td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>
+

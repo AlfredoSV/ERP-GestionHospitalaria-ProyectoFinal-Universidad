@@ -62,7 +62,9 @@ function GnerarTablaCitas(response) {
                 titleAttr: 'generarReporte',
                 className: 'btn-import',
                 action: function (e, dt, node, config) {
-                    consumirMetodoAccion("/Citas/GenerarReporte", false,"POST",null,null)
+                    //consumirMetodoAccion("/Citas/GenerarReporte", false,"GET",null,null)
+                    //window.location = "/Citas/GenerarReporte";
+                    window.open('/Citas/GenerarReporte', '_blank');
                 }
 
             }

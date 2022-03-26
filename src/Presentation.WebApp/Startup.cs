@@ -102,6 +102,8 @@ namespace Presentation.WebApp
                     pattern: "{controller=Home}/{action=Index}");
                 endpoints.MapRazorPages();
             });
+
+            Rotativa.AspNetCore.RotativaConfiguration.Setup(env.WebRootPath, "..\\Rotativa\\Windows\\");
         }
     }
 }
