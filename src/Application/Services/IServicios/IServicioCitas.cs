@@ -10,7 +10,8 @@ namespace Application.IServicios
 {
     public interface IServicioCitas
     {
-        public List<Cita> ConsultarCitas(int pagina, int tamanioPag);
+        List<Cita> ConsultarCitasPaginadas(int pagina, int tamanioPag);
+        List<Cita> ConsultarCitas();
         Cita ConsultarDetalleCita(Guid id);
         IEnumerable<DtoGrafica> ConsultarCitasGraficas();
         bool CrearNuevaCita(Cita cita);

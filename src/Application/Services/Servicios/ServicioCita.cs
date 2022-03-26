@@ -39,13 +39,19 @@ namespace Application.Servicios
             return _repositorioCitas.EliminarCita(id);
         }
 
-        public List<Cita> ConsultarCitas(int pagina, int tamanioPag)
+        public List<Cita> ConsultarCitasPaginadas(int pagina, int tamanioPag)
         {
 
-            return _repositorioCitas.ListarCitas(pagina, tamanioPag);
+            return _repositorioCitas.ListarCitasPaginadas(pagina, tamanioPag);
 
         }
 
+        public List<Cita> ConsultarCitas()
+        {
+
+            return _repositorioCitas.ListarCitas();
+
+        }
         public IEnumerable<DtoGrafica> ConsultarCitasGraficas()
         {
             return _repositorioCitas.ListarCitasGraficas().GroupBy(info => info.EstatusCita)

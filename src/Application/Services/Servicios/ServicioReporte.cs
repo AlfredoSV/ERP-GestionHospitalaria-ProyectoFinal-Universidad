@@ -2,7 +2,7 @@
 using System.IO;
 using System.IO;
 using System;
-
+using Application.Dtos;
 
 namespace Application.Servicios
 {
@@ -15,26 +15,11 @@ namespace Application.Servicios
             _servicioCitas = servicioCitas;
         }
 
-        public MemoryStream GenerarReporteCitas()
+        public DtoReporteCitas ConsultarReporteCitas()
         {
-            MemoryStream docMemory = new MemoryStream();
-            try
-            {
-       
-                
+            var citas = _servicioCitas.ConsultarCitas();
 
-            }
-            catch (System.Exception e)
-            {
-
-                throw;
-            }
-
-            var base64 = Convert.ToBase64String(docMemory.ToArray());
-
-            return docMemory;
-            
-;            
+            return new DtoReporteCitas("Alfredo", DateTime.Now.AddMonths(1).ToString(), DateTime.Now.AddMonths(1).ToString(), citas, citas);
         }
     }
 }

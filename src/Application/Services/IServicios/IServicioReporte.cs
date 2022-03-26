@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Application.Dtos;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace Application.IServicios
 {
     public interface IServicioReporte
     {
-       MemoryStream GenerarReporteCitas(); 
+       DtoReporteCitas ConsultarReporteCitas(); 
     }
 }
