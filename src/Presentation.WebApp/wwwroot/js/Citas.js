@@ -155,10 +155,14 @@ const enviarCitaEditada = function () {
 
 		let data = { id: document.querySelector("#identificadorcita").value, dataCita };
 
-		consumirMetodoAccion("/Citas/EditarCita", false, 'post', data, () => { $('#exampleModal').modal('hide') });
+		consumirMetodoAccion("/Citas/EditarCita", false, 'post', data, () => { $('#exampleModal').modal('hide') }, error);
 
 		$('#exampleModal').modal('hide');
 		$('#citasTabla').DataTable().ajax.reload();
 	}
 
+}
+
+const error = () => {
+	window.location.href = "/Citas/Error"
 }

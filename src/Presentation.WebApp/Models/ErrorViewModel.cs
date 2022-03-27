@@ -4,8 +4,9 @@ namespace Presentation.WebApp.Models
 {
     public class ErrorViewModel
     {
-        public string RequestId { get; set; }
+        private string message;
 
-        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+        public string Message { get => message; set => message = value; }
+
     }
 }
