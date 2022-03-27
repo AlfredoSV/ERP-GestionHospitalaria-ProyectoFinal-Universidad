@@ -1,29 +1,23 @@
-﻿$(document).ready(function () {
-
-    consumirMetodoAccion("/Citas/ListarCitas", false, 'post', '{}', GnerarTablaCitas);
-
-});
-
-function listarCitas() {
-
-    consumirMetodoAccion("/Citas/ListarCitas", false, 'post', '{}', GnerarTablaCitas);
-}
+﻿
+GenerarTablaCitas();
 
 
-function GnerarTablaCitas(response) {
+function GenerarTablaCitas() {
 
-    $('#citasTabla').DataTable().clear().destroy();
+    document.querySelector("#theadCitasTabla").innerHTML = `<tr>
+                    <th style = "width:10%" > Nombre paciente</th >
+                        <th style="width:10%">Estatus cita</th>
+                        <th style="width:10%">Área de atención</th>
+                        <th style="width:10%">Hora y fecha cita</th>
 
-
+                        <th style="width:50%">Acciones</th>
+                    </tr > `;
+   
     $('#citasTabla').DataTable({
         "ordering": true,
         "searching": true,
-        "lengthChange": true,
-
         "pageLength": 15,
-        processing: true,
-
-
+        "processing": true,
         deferRender: true,
         scrollY: 500,
         scrollCollapse: true,
@@ -39,11 +33,8 @@ function GnerarTablaCitas(response) {
             "datatype": "json"
         },
 
-        /**/
-
-        //data: response,
         columns: [
-            { 'data': 'id' },
+            
             { 'data': 'nombrePaciente' },
             { 'data': 'estatusCita' },
             { 'data': 'areaAtencion' },
@@ -62,8 +53,7 @@ function GnerarTablaCitas(response) {
                 titleAttr: 'generarReporte',
                 className: 'btn-import',
                 action: function (e, dt, node, config) {
-                    //consumirMetodoAccion("/Citas/GenerarReporte", false,"GET",null,null)
-                    //window.location = "/Citas/GenerarReporte";
+            
                     window.open('/Citas/GenerarReporte', '_blank');
                 }
 
@@ -72,14 +62,10 @@ function GnerarTablaCitas(response) {
         ],
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json",
-            processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '
-
         }
     });
 
-
-
-
+   
 }
 
 const eliminar = (idCitaElimiar) => {
@@ -93,7 +79,7 @@ const eliminar = (idCitaElimiar) => {
             consumirMetodoAccion("/Citas/CancelarCita", false, 'post', data, (result) => {
                 if (result != null) {
                     alertify.success('La cita se canceló correctamente');
-                    listarCitas();
+                    $('#citasTabla').DataTable().ajax.reload();
                 }
             });
         }, () => { alertify.error('No se canceló la cita') }
@@ -103,41 +89,6 @@ const eliminar = (idCitaElimiar) => {
 
 const detalleCita = (cita) => {
 
-    /*$.ajax({
-        url: location.origin + "/Citas/Details", // Url
-        data: {
-            id: cita.hash.replace('#', '')
-            // ...
-        },
-        async: false,
-        type: "post"  // Verbo HTTP
-    })
-        // Se ejecuta si todo fue bien.
-        .done(function (result) {
-            if (result != null) {
-                document.querySelector("#tablaDetalleCita").innerHTML =
-                    `<tbody >
-                        <tr><td class="p-1">Identificador del paciente:</td><td class="p-2"><strong>${result.id}</strong></td></tr>
-                        <tr><td class="p-1">Nombre del paciente:</td><td class="p-2"><strong>${result.nombrePaciente}</strong></td></tr>
-                        <tr><td class="p-1">Fecha de la cita:</td><td class="p-2"><strong>${new Date(result.fecha).toLocaleString()}</strong></td></tr>
-                        <tr><td class="p-1"> Estatus de cita:</td><td class="p-1"><strong>${result.estatusCita}</strong></td></tr>
-                        <tr><td class="p-1">Área de atención:</td><td class="p-1"><strong>${result.areaAtencion}</strong></td></tr>
-                    </tbody>`
-
-
-
-            }
-            else {
-            }
-        })
-        // Se ejecuta si se produjo un error.
-        .fail(function (xhr, status, error) {
-
-        })
-        // Hacer algo siempre, haya sido exitosa o no.
-        .always(function () {
-
-        });*/
     consumirMetodoAccion("/Citas/Details", false, "post", { id: cita.hash.replace('#', '') }, (result) => {
 
         if (result != null) {
@@ -274,7 +225,7 @@ const enviarCitaEditada = function () {
         consumirMetodoAccion("/Citas/EditarCita", false, 'post', data, () => { $('#exampleModal').modal('hide') });
 
         $('#exampleModal').modal('hide');
-        listarCitas();
+        GenerarTablaCitas();
     }
 
 }
