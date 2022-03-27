@@ -18,11 +18,11 @@
 		scrollY: 500,
 		scrollCollapse: true,
 		scroller: true,
-		async: true,
+		async: false,
 		"serverSide": true,
 		"filter": true,
 		"ajax": {
-			"url": "/Citas/EjemploPagDataTables",
+			"url": "/Citas/ListarCitas",
 			"type": "POST",
 			"datatype": "json"
 		},
@@ -34,7 +34,7 @@
 			{ 'data': 'fecha' },
 			{
 				mRender: function (data, type, row) {
-					return '<a href="#' + row.id + '" class="btn btn-danger m-1" onclick="eliminar(this)">Cancelar</a><a data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-whatever="mdo"  href="#' + row.id + '" class="btn btn-info m-1" onclick="detalleCita(this)">Detalle</a><a class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="mdo" onclick="editarCita(this)" href="#' + row.id + '">Editar</a >'
+					return '<a href="#' + row.id + '" class="btn btn-danger m-1" onclick="eliminar(this)"><i class="material-icons">&#xe888;</i></a><a data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-whatever="mdo"  href="#' + row.id + '" class="btn btn-info m-1" onclick="detalleCita(this)"><i class="material-icons">&#xe873;</i></a><a class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="mdo" onclick="editarCita(this)" href="#' + row.id + '"><i style="font-size: 28px" class="fas">&#xf044;</i></a >'
 				}
 			}
 		],
@@ -83,7 +83,7 @@ const eliminar = (idCitaElimiar) => {
 
 const detalleCita = (cita) => {
 
-	consumirMetodoAccion("/Citas/Details", false, "post", { id: cita.hash.replace('#', '') }, (result) => {
+	consumirMetodoAccion("/Citas/DetalleCita", false, "post", { id: cita.hash.replace('#', '') }, (result) => {
 
 		if (result != null) {
 
@@ -107,7 +107,7 @@ const editarCita = (cita) => {
 	let textValidacion = document.querySelector("#validacionFormularioEditarCita");
 	textValidacion.innerHTML = '';
 
-	consumirMetodoAccion("/Citas/Details", false, "POST", {
+	consumirMetodoAccion("/Citas/DetalleCita", false, "POST", {
 		id: cita.hash.replace('#', '')
 
 	}, (result) => {
