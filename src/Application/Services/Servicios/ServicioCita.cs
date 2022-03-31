@@ -36,6 +36,7 @@ namespace Application.Servicios
 
         public bool EliminarCita(Guid id)
         {
+            throw new DivideByZeroException();
             return _repositorioCitas.EliminarCita(id);
         }
 
