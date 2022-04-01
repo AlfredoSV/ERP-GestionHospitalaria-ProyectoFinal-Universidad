@@ -1,6 +1,6 @@
 # "Proyecto para la materia de implantación y mantenimiento de software"
 
-#Si desea descargarlo, restaure el archivo db.bak
+#Es necesario restaurar el archivo db.bak para la base de datos
 
 ![cap1](https://github.com/AlfredoSV/ERP-GestionHospitalaria-ProyectoFinal-Universidad/blob/main/capturas/cap1.PNG)
 
