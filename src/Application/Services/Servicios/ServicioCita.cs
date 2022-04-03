@@ -36,14 +36,21 @@ namespace Application.Servicios
 
         public bool EliminarCita(Guid id)
         {
-            throw new DivideByZeroException();
             return _repositorioCitas.EliminarCita(id);
         }
 
-        public List<Cita> ConsultarCitasPaginadas(int pagina, int tamanioPag)
+        public List<Cita> ConsultarCitasPaginadas(int pagina, int tamanioPag,string busqueda,bool ordernado)
         {
+            List<Cita> listaCitas = _repositorioCitas.ListarCitasPaginadas(pagina,tamanioPag);
 
-            return _repositorioCitas.ListarCitasPaginadas(pagina, tamanioPag);
+            if(!busqueda.Equals(string.Empty)){
+                listaCitas = listaCitas.Where(c => c.NombrePaciente.Contains(busqueda)).ToList();
+            }
+            if(ordernado){
+                listaCitas = listaCitas.OrderBy(c => c.NombrePaciente).ToList();
+            }
+
+            return listaCitas;
 
         }
 
