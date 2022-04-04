@@ -6,8 +6,8 @@
 
 @model Presentation.WebApp.Models.CitaModelViewEditar
 
-<form id="partialform" asp-controller="Citas" asp-action="EditarCita" data-ajax="true"
-     data-ajax-update="#partialform" data-ajax-mode="replace">
+<form id="formularioEditar" asp-controller="Citas" asp-action="EditarCita" data-ajax="true"
+      data-ajax-update="#formularioEditar" data-ajax-mode="replace" data-ajax-complete="enviarCitaEditada" data-ajax-failure="error" >
 
     <div class="row mt-3 mb-2">
 

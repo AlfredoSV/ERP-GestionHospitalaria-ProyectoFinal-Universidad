@@ -117,49 +117,12 @@ const editarCita = (cita) => {
 
 }
 
-const enviarCitaEditada = function () {
-
-	/*let datosCorrectos = true;
-	let fecha = document.querySelector("#Fecha");
-
-	let observaciones = document.querySelector("#observaciones");
-	let textValidacion = document.querySelector("#validacionFormularioEditarCita");
-	textValidacion.innerHTML = '';
-	if (observaciones.value == '') {
-		textValidacion.innerHTML = "<li>El campo Observaciones es requerido</li>";
-		datosCorrectos = false;
-	}
-	if (fecha.value == '') {
-		textValidacion.innerHTML += "<li>El campo Fecha es requerido</li>";
-		datosCorrectos = false;
-	}
-
-	let dataCita = {};
-
-	dataCita.pacienteid = null;
-	dataCita.idEstaus = document.querySelector("#estatus").value;
-	dataCita.idArea = document.querySelector("#areatencion").value;
-	dataCita.fecha = document.querySelector("#Fecha").value;
-	dataCita.observaciones = document.querySelector("#observaciones").value;
-
-	if (datosCorrectos) {
-
-		let data = { id: document.querySelector("#Id").value, dataCita };
-
-		consumirMetodoAccion("/Citas/EditarCita", false, 'post', data, () => {
-			$('#modalCita').modal('hide');
-			$('#citasTabla').DataTable().ajax.reload();
-			alertify.success('La cita se edito correctamente');
-		}, error);
-
-
-		
-	}*/
-	//$('#modalCita').modal('hide');
+function enviarCitaEditada() {
+	$("#modalCita").modal("hide");
 	$('#citasTabla').DataTable().ajax.reload();
 	alertify.success('La cita se edito correctamente');
 }
 
-const error = () => {
+function error() {
 	window.location.href = "/Citas/Error"
 }
