@@ -15,7 +15,7 @@ namespace Application.IServicios
         Cita ConsultarDetalleCita(Guid id);
         IEnumerable<DtoGrafica> ConsultarCitasGraficas();
         bool CrearNuevaCita(Cita cita);
-        bool EditarCita(Guid id, Cita cita);
+        bool EditarCita(Cita cita);
         bool EliminarCita(Guid id);
 
     }

@@ -4,69 +4,74 @@
 @{
 }
 
-@model Domain.Cita
+@model Presentation.WebApp.Models.CitaModelViewEditar
 
-<div class="row mt-3 mb-2">
+<form id="partialform" asp-controller="Citas" asp-action="EditarCita" data-ajax="true"
+     data-ajax-update="#partialform" data-ajax-mode="replace">
 
-    <div class="col">
-        Identificador de la cita:
-        <input disabled class="form-control" asp-for="Id" />
-    </div>
-</div>
+    <div class="row mt-3 mb-2">
 
-<div class="row mt-3 mb-2">
-
-    <div class="col">
-        Nombre del paciente:
-        <input disabled class="form-control" asp-for="NombrePaciente">
-    </div>
-</div>
-
-<div class="row mt-3 mb-2">
-
-    <div class="col">
-        Fecha y hora de la cita:
-        <input type="datetime-local" class="form-control" asp-for="Fecha">
+        <div class="col">
+            Identificador de la cita:
+            <input readonly class="form-control" asp-for="Id" />
+        </div>
+        <span class="text-danger"></span>
     </div>
 
-</div>
-<div class="row mt-3 mb-2">
+    <div class="row mt-3 mb-2">
 
-    <div class="col">
-        Área de atención:
-        <select name="areatencion" id="areatencion" class="form-control" asp-for="IdArea" asp-items="@ViewBag.areas"></select>
-
+        <div class="col">
+            Nombre del paciente:
+            <input readonly class="form-control" asp-for="NombrePaciente">
+        </div>
     </div>
 
-</div>
+    <div class="row mt-3 mb-2">
 
-<div class="row mt-3 mb-2">
+        <div class="col">
+            Fecha y hora de la cita:
+            <input type="datetime-local" class="form-control" asp-for="Fecha">
+        </div>
 
-    <div class="col">
-        Estatus:
+    </div>
+    <div class="row mt-3 mb-2">
 
-        <select name="estatus" id="estatus" class="form-control" asp-for="IdEstaus" asp-items="@ViewBag.estatus"></select>
+        <div class="col">
+            Área de atención:
+            <select class="form-control" asp-for="IdArea" asp-items="@ViewBag.areas"></select>
+
+        </div>
 
     </div>
 
-</div>
-<div class="row mt-3 mb-2">
+    <div class="row mt-3 mb-2">
 
-    <div class="col">
-        Observaciones:
-        <textarea class="form-control" id="observaciones" asp-for="Observaciones"></textarea>
+        <div class="col">
+            Estatus:
+
+            <select class="form-control" asp-for="IdEstaus" asp-items="@ViewBag.estatus"></select>
+
+        </div>
+
     </div>
-</div>
+    <div class="row mt-3 mb-2">
 
-<div class="text-danger" id="validacionFormularioEditarCita"></div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-    <button type="button" class="btn btn-primary" onclick=enviarCitaEditada()>Editar cita</button>
-</div>
+        <div class="col">
+            Observaciones:
+            <textarea class="form-control" asp-for="Observaciones"></textarea>
+        </div>
+        <div asp-validation-summary="All" class="text-danger"></div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Editar cita</button>
+    </div>
+</form>
 
 
 @section Scripts {
-
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
     <script src="~/js/Citas.js" asp-append-version="true"></script>
+
 
 }

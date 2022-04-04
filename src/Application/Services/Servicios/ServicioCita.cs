@@ -29,9 +29,9 @@ namespace Application.Servicios
             return _repositorioCitas.CrearNuevaCita(cita);
         }
 
-        public bool EditarCita(Guid id, Cita cita)
+        public bool EditarCita( Cita cita)
         {
-            return _repositorioCitas.EditarCita(id, cita);
+            return _repositorioCitas.EditarCita(cita);
         }
 
         public bool EliminarCita(Guid id)

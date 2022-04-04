@@ -13,7 +13,7 @@ namespace Domain.IRepositorios
         List<Cita> ListarCitasGraficas();
         Cita ConsultarDetalleCita(Guid id);
         bool CrearNuevaCita(Cita data);
-        bool EditarCita(Guid id, Cita data);
+        bool EditarCita( Cita data);
         bool EliminarCita(Guid id);
     }
 }

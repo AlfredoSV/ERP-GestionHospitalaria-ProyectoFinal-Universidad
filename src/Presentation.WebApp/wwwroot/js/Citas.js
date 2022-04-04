@@ -119,7 +119,7 @@ const editarCita = (cita) => {
 
 const enviarCitaEditada = function () {
 
-	let datosCorrectos = true;
+	/*let datosCorrectos = true;
 	let fecha = document.querySelector("#Fecha");
 
 	let observaciones = document.querySelector("#observaciones");
@@ -154,8 +154,10 @@ const enviarCitaEditada = function () {
 
 
 		
-	}
-
+	}*/
+	//$('#modalCita').modal('hide');
+	$('#citasTabla').DataTable().ajax.reload();
+	alertify.success('La cita se edito correctamente');
 }
 
 const error = () => {
