@@ -87,7 +87,7 @@ const detalleCita = (cita) => {
 	consumirMetodoAccion("/Citas/DetalleCita", false, "post", { id: cita.hash.replace('#', '') }, (result) => {
 
 		if (result != null) {
-
+			document.querySelector("#modalTitleCita").innerHTML = "Detalle - Cita";
 			document.querySelector("#modalBodyCita").innerHTML = result;
 
 		}
@@ -99,23 +99,16 @@ const detalleCita = (cita) => {
 const editarCita = (cita) => {
 
 	let textValidacion = document.querySelector("#validacionFormularioEditarCita");
-	textValidacion.innerHTML = '';
+	//textValidacion.innerHTML = '';
 
 	consumirMetodoAccion("/Citas/DetalleCitaEditar", false, "POST", {
 		id: cita.hash.replace('#', '')
 
 	}, (result) => {
 		if (result != null) {
-			/*document.querySelector("#identificadorcita").value = result.id;
-			document.querySelector("#nombrePaciente").value = result.nombrePaciente;
-			document.querySelector("#observaciones").value = result.observaciones;
-			document.querySelector("#fecha").value = result.fecha;
-
-			$("#areatencion option:contains(" + result.areaAtencion + ")").attr('selected', true);
-			$("#estatus option:contains(" + result.estatusCita + ")").attr('selected', true);
-			$('#citasTabla').DataTable().ajax.reload();*/
 
 			document.querySelector("#modalBodyCita").innerHTML = result;
+			document.querySelector("#modalTitleCita").innerHTML = "Editar - Cita";
 
 
 		}
@@ -127,7 +120,7 @@ const editarCita = (cita) => {
 const enviarCitaEditada = function () {
 
 	let datosCorrectos = true;
-	let fecha = document.querySelector("#fecha");
+	let fecha = document.querySelector("#Fecha");
 
 	let observaciones = document.querySelector("#observaciones");
 	let textValidacion = document.querySelector("#validacionFormularioEditarCita");
@@ -146,17 +139,21 @@ const enviarCitaEditada = function () {
 	dataCita.pacienteid = null;
 	dataCita.idEstaus = document.querySelector("#estatus").value;
 	dataCita.idArea = document.querySelector("#areatencion").value;
-	dataCita.fecha = document.querySelector("#fecha").value;
+	dataCita.fecha = document.querySelector("#Fecha").value;
 	dataCita.observaciones = document.querySelector("#observaciones").value;
 
 	if (datosCorrectos) {
 
-		let data = { id: document.querySelector("#identificadorcita").value, dataCita };
+		let data = { id: document.querySelector("#Id").value, dataCita };
 
-		consumirMetodoAccion("/Citas/EditarCita", false, 'post', data, () => { $('#exampleModal').modal('hide') }, error);
+		consumirMetodoAccion("/Citas/EditarCita", false, 'post', data, () => {
+			$('#modalCita').modal('hide');
+			$('#citasTabla').DataTable().ajax.reload();
+			alertify.success('La cita se edito correctamente');
+		}, error);
 
-		$('#exampleModal').modal('hide');
-		$('#citasTabla').DataTable().ajax.reload();
+
+		
 	}
 
 }

@@ -34,7 +34,7 @@
 
     <div class="col">
         Área de atención:
-        <select name="areatencion" id="areatencion" class="form-control" asp-for="idArea" asp-items="@ViewBag.areas" ></select>
+        <select name="areatencion" id="areatencion" class="form-control" asp-for="IdArea" asp-items="@ViewBag.areas"></select>
 
     </div>
 
@@ -45,7 +45,7 @@
     <div class="col">
         Estatus:
 
-        <select name="estatus" id="estatus" class="form-control" asp-for="idEstaus" asp-items="@ViewBag.estatus" ></select>
+        <select name="estatus" id="estatus" class="form-control" asp-for="IdEstaus" asp-items="@ViewBag.estatus"></select>
 
     </div>
 
@@ -63,3 +63,10 @@
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
     <button type="button" class="btn btn-primary" onclick=enviarCitaEditada()>Editar cita</button>
 </div>
+
+
+@section Scripts {
+
+    <script src="~/js/Citas.js" asp-append-version="true"></script>
+
+}
