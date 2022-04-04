@@ -34,7 +34,7 @@
 			{ 'data': 'fecha' },
 			{
 				mRender: function (data, type, row) {
-					return '<a href="#' + row.id + '" class="btn btn-danger m-1" onclick="eliminar(this)"><i class="material-icons">&#xe888;</i></a><a data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-whatever="mdo"  href="#' + row.id + '" class="btn btn-info m-1" onclick="detalleCita(this)"><i class="material-icons">&#xe873;</i></a><a class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="mdo" onclick="editarCita(this)" href="#' + row.id + '"><i style="font-size: 28px" class="fas">&#xf044;</i></a >'
+					return '<a href="#' + row.id + '" class="btn btn-danger m-1" onclick="eliminar(this)"><i class="material-icons">&#xe888;</i></a><a data-bs-toggle="modal" data-bs-target="#modalCita" data-bs-whatever="mdo"  href="#' + row.id + '" class="btn btn-info m-1" onclick="detalleCita(this)"><i class="material-icons">&#xe873;</i></a><a class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#modalCita" data-bs-whatever="mdo" onclick="editarCita(this)" href="#' + row.id + '"><i style="font-size: 28px" class="fas">&#xf044;</i></a >'
 				}
 			}
 		],
@@ -81,20 +81,14 @@ const eliminar = (idCitaElimiar) => {
 	).set('labels', { ok: 'Sí', cancel: 'No' });
 }
 
+
 const detalleCita = (cita) => {
 
 	consumirMetodoAccion("/Citas/DetalleCita", false, "post", { id: cita.hash.replace('#', '') }, (result) => {
 
 		if (result != null) {
 
-			document.querySelector("#tablaDetalleCita").innerHTML =
-				`<tbody >
-                        <tr><td class="p-1">Identificador del paciente:</td><td class="p-2"><strong>${result.id}</strong></td></tr>
-                        <tr><td class="p-1">Nombre del paciente:</td><td class="p-2"><strong>${result.nombrePaciente}</strong></td></tr>
-                        <tr><td class="p-1">Fecha de la cita:</td><td class="p-2"><strong>${new Date(result.fecha).toLocaleString()}</strong></td></tr>
-                        <tr><td class="p-1"> Estatus de cita:</td><td class="p-1"><strong>${result.estatusCita}</strong></td></tr>
-                        <tr><td class="p-1">Área de atención:</td><td class="p-1"><strong>${result.areaAtencion}</strong></td></tr>
-                    </tbody>`;
+			document.querySelector("#modalBodyCita").innerHTML = result;
 
 		}
 
@@ -107,19 +101,23 @@ const editarCita = (cita) => {
 	let textValidacion = document.querySelector("#validacionFormularioEditarCita");
 	textValidacion.innerHTML = '';
 
-	consumirMetodoAccion("/Citas/DetalleCita", false, "POST", {
+	consumirMetodoAccion("/Citas/DetalleCitaEditar", false, "POST", {
 		id: cita.hash.replace('#', '')
 
 	}, (result) => {
 		if (result != null) {
-			document.querySelector("#identificadorcita").value = result.id;
+			/*document.querySelector("#identificadorcita").value = result.id;
 			document.querySelector("#nombrePaciente").value = result.nombrePaciente;
 			document.querySelector("#observaciones").value = result.observaciones;
 			document.querySelector("#fecha").value = result.fecha;
 
 			$("#areatencion option:contains(" + result.areaAtencion + ")").attr('selected', true);
 			$("#estatus option:contains(" + result.estatusCita + ")").attr('selected', true);
-			$('#citasTabla').DataTable().ajax.reload();
+			$('#citasTabla').DataTable().ajax.reload();*/
+
+			document.querySelector("#modalBodyCita").innerHTML = result;
+
+
 		}
 	});
 

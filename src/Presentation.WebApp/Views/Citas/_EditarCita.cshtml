@@ -1,0 +1,65 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Domain.Cita
+
+<div class="row mt-3 mb-2">
+
+    <div class="col">
+        Identificador de la cita:
+        <input disabled class="form-control" asp-for="Id" />
+    </div>
+</div>
+
+<div class="row mt-3 mb-2">
+
+    <div class="col">
+        Nombre del paciente:
+        <input disabled class="form-control" asp-for="NombrePaciente">
+    </div>
+</div>
+
+<div class="row mt-3 mb-2">
+
+    <div class="col">
+        Fecha y hora de la cita:
+        <input type="datetime-local" class="form-control" asp-for="Fecha">
+    </div>
+
+</div>
+<div class="row mt-3 mb-2">
+
+    <div class="col">
+        Área de atención:
+        <select name="areatencion" id="areatencion" class="form-control" asp-for="idArea" asp-items="@ViewBag.areas" ></select>
+
+    </div>
+
+</div>
+
+<div class="row mt-3 mb-2">
+
+    <div class="col">
+        Estatus:
+
+        <select name="estatus" id="estatus" class="form-control" asp-for="idEstaus" asp-items="@ViewBag.estatus" ></select>
+
+    </div>
+
+</div>
+<div class="row mt-3 mb-2">
+
+    <div class="col">
+        Observaciones:
+        <textarea class="form-control" id="observaciones" asp-for="Observaciones"></textarea>
+    </div>
+</div>
+
+<div class="text-danger" id="validacionFormularioEditarCita"></div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+    <button type="button" class="btn btn-primary" onclick=enviarCitaEditada()>Editar cita</button>
+</div>

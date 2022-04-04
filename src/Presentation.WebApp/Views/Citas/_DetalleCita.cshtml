@@ -1,0 +1,20 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Domain.Cita
+
+<table class="table table-striped">
+
+
+    <tbody>
+        <tr><td class="p-1">Identificador del paciente:</td><td class="p-2"><strong>@Model.PacienteId</strong></td></tr>
+        <tr><td class="p-1">Nombre del paciente:</td><td class="p-2"><strong>@Model.NombrePaciente</strong></td></tr>
+        <tr><td class="p-1">Fecha de la cita:</td><td class="p-2"><strong>@Model.Fecha</strong></td></tr>
+        <tr><td class="p-1">Estatus de cita:</td><td class="p-1"><strong>@Model.EstatusCita</strong></td></tr>
+        <tr><td class="p-1">Área de atención:</td><td class="p-1"><strong>@Model.AreaAtencion</strong></td></tr>
+    </tbody>
+
+</table>
