@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using Application.IServicios;
 using Domain.IRepositorios;
+using Microsoft.AspNetCore.Identity;
 
 namespace Presentation.WebApp.Controllers
 {
@@ -24,16 +25,17 @@ namespace Presentation.WebApp.Controllers
         private readonly IServicioUsuarios _servicioUsuarios;
         private readonly IServicioProducto _servicioProducto;
         private readonly IFileConvertService _fileConvertService;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public HomeController(IConfiguration configuration, IFileConvertService fileConvertService, IServicioCitas servicioCitas, IServicioPaciente servicioPaciente, IServicioCatalogos servicioCatalogos, IServicioUsuarios servicioUsuarios,IServicioProducto servicioProducto)
+        public HomeController(IConfiguration configuration, UserManager<IdentityUser> userManager, IFileConvertService fileConvertService, IServicioCitas servicioCitas, IServicioPaciente servicioPaciente, IServicioCatalogos servicioCatalogos, IServicioUsuarios servicioUsuarios,IServicioProducto servicioProducto)
         {
             _servicioPaciente = servicioPaciente;
             _servicioCitas = servicioCitas;
             _servicioCatalogos = servicioCatalogos;
-            _doctoresDbContext = new RepositorioDoctores(configuration.GetConnectionString("DefaultConnection"));
             _servicioUsuarios = servicioUsuarios;
             _servicioProducto = servicioProducto;
             _fileConvertService = fileConvertService;
+            _userManager = userManager;
         }
 
 
@@ -87,8 +89,10 @@ namespace Presentation.WebApp.Controllers
         [HttpGet]
         public IActionResult MisDatos()
         {
+            
             Catalogos();
             string nombreUsuario = HttpContext.User.Identity.Name;
+            var idUsuario = _userManager.Users.Single(u => u.UserName == nombreUsuario).Id;
             
             return View("MisDatos", _servicioUsuarios.DetalleUsuario(nombreUsuario));
         }
@@ -121,12 +125,6 @@ namespace Presentation.WebApp.Controllers
             return View("MisDatos", _servicioUsuarios.DetalleUsuario(usuario));
 
         }
-
-        /*[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }*/
 
         private void Catalogos()
         {

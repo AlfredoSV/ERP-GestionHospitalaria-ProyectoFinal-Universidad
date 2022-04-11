@@ -24,7 +24,9 @@
 		"ajax": {
 			"url": "/Citas/ListarCitas",
 			"type": "POST",
-			"datatype": "json"
+			"datatype": "json", error: function (jqXHR, ajaxOptions, thrownError) {
+				window.location.href = "/Citas/Error"
+			}
 		},
 		columns: [
 
@@ -70,12 +72,12 @@ const eliminar = (idCitaElimiar) => {
 			let data = {
 				id: idCitaElimiar.hash.replace('#', '')
 			};
-			consumirMetodoAccion("/Citas/CancelarCita", false, 'post', data, (result) => {
+			consumirMetodoAccion("/Citas/CancelarCita", false, 'delete', data, (result) => {
 				if (result != null) {
 					alertify.success('La cita se canceló correctamente');
 					$('#citasTabla').DataTable().ajax.reload();
 				}
-			});
+			}, () => { alertify.error('Algo salio mal, favor de contactar con el administrador'); });
 		}, () => { alertify.error('No se canceló la cita') }
 
 	).set('labels', { ok: 'Sí', cancel: 'No' });
@@ -92,14 +94,11 @@ const detalleCita = (cita) => {
 
 		}
 
-	});
+	}, error);
 
 }
 
 const editarCita = (cita) => {
-
-	let textValidacion = document.querySelector("#validacionFormularioEditarCita");
-	//textValidacion.innerHTML = '';
 
 	consumirMetodoAccion("/Citas/DetalleCitaEditar", false, "POST", {
 		id: cita.hash.replace('#', '')
@@ -117,12 +116,17 @@ const editarCita = (cita) => {
 
 }
 
-function enviarCitaEditada() {
-	$("#modalCita").modal("hide");
-	$('#citasTabla').DataTable().ajax.reload();
-	alertify.success('La cita se edito correctamente');
+function enviarCitaEditada(result) {
+	if (result.status == 204) {
+		$("#modalCita").modal("hide");
+		$('#citasTabla').DataTable().ajax.reload();
+		alertify.success('La cita se edito correctamente');
+	}
+
 }
 
-function error() {
-	window.location.href = "/Citas/Error"
+function error(result) {
+	if (result.status == 500) {
+		window.location.href = "/Citas/Error"
+	}	
 }
