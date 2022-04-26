@@ -26,9 +26,9 @@ namespace Application.Servicios
             return _repositorioUsuarios.ActualizarRolDeUsuario(nombreUsuario, rol);
         }
 
-        public UsuarioInfo DetalleUsuario(string nombreUsuario)
+        public UsuarioInfo DetalleUsuario(Guid idUsuario)
         {
-            return _repositorioUsuarios.ConsultarDetalleUsuario(nombreUsuario);
+            return _repositorioUsuarios.ConsultarDetalleUsuario(idUsuario);
         }
 
         public List<Usuario> ListarUsuarios()

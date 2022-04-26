@@ -9,7 +9,7 @@ namespace Domain.IRepositorios
     public interface IRepositorioUsuarios
     {
         List<Usuario> ConsultarUsuarios();
-        UsuarioInfo ConsultarDetalleUsuario(string nombreUsuario);
+        UsuarioInfo ConsultarDetalleUsuario(Guid idUsuario);
         bool ActualizarUsuario(UsuarioInfo usuarioInfo, string nombreUsuario);
         bool ActualizarRolDeUsuario(string nombreUsuario, string rol);
     }

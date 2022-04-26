@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using Application.IServicios;
 using Domain.IRepositorios;
 using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace Presentation.WebApp.Controllers
 {
@@ -27,7 +28,7 @@ namespace Presentation.WebApp.Controllers
         private readonly IFileConvertService _fileConvertService;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public HomeController(IConfiguration configuration, UserManager<IdentityUser> userManager, IFileConvertService fileConvertService, IServicioCitas servicioCitas, IServicioPaciente servicioPaciente, IServicioCatalogos servicioCatalogos, IServicioUsuarios servicioUsuarios,IServicioProducto servicioProducto)
+        public HomeController(UserManager<IdentityUser> userManager, IFileConvertService fileConvertService, IServicioCitas servicioCitas, IServicioPaciente servicioPaciente, IServicioCatalogos servicioCatalogos, IServicioUsuarios servicioUsuarios,IServicioProducto servicioProducto)
         {
             _servicioPaciente = servicioPaciente;
             _servicioCitas = servicioCitas;
@@ -89,12 +90,21 @@ namespace Presentation.WebApp.Controllers
         [HttpGet]
         public IActionResult MisDatos()
         {
+            try
+            {
+                Catalogos();
+                string nombreUsuario = HttpContext.User.Identity.Name;
+                var idUsuario = Guid.Parse(_userManager.Users.ToList().Where(u => u.UserName == nombreUsuario).FirstOrDefault().Id);
+
+                return View("MisDatos", _servicioUsuarios.DetalleUsuario(idUsuario));
+            }
+            catch (Exception exception)
+            {
+
+                return View("Error");
+            }
             
-            Catalogos();
-            string nombreUsuario = HttpContext.User.Identity.Name;
-            var idUsuario = _userManager.Users.Single(u => u.UserName == nombreUsuario).Id;
-            
-            return View("MisDatos", _servicioUsuarios.DetalleUsuario(nombreUsuario));
+           
         }
 
         [HttpPost]
@@ -106,23 +116,25 @@ namespace Presentation.WebApp.Controllers
             return Json(seActualizo);
         }
 
+        [HttpPost]
         public IActionResult EditarMiInformacion(Domain.UsuarioInfo data)
         {
 
-            string usuario = HttpContext.User.Identity.Name;
-            
+            string nombreUsuario = HttpContext.User.Identity.Name;
+            var idUsuario = Guid.Parse(_userManager.Users.ToList().Where(u => u.UserName == nombreUsuario).FirstOrDefault().Id);
+
             if (ModelState.IsValid)
             {
-                data.FotoT = data.FotoFile == null ? _servicioUsuarios.DetalleUsuario(usuario).FotoT : _fileConvertService.ConvertirABase64(data.FotoFile.OpenReadStream()); ;
+                data.FotoT = data.FotoFile == null ? _servicioUsuarios.DetalleUsuario(idUsuario).FotoT : _fileConvertService.ConvertirABase64(data.FotoFile.OpenReadStream()); ;
                 
-                var seActualizo = _servicioUsuarios.ActualizarDatosUsuario(data, usuario);
+                var seActualizo = _servicioUsuarios.ActualizarDatosUsuario(data, nombreUsuario);
 
                 ViewBag.seActualizo = seActualizo;
 
-                return View("MisDatos", _servicioUsuarios.DetalleUsuario(usuario));
+                return View("MisDatos", _servicioUsuarios.DetalleUsuario(idUsuario));
             }
 
-            return View("MisDatos", _servicioUsuarios.DetalleUsuario(usuario));
+            return View("MisDatos", _servicioUsuarios.DetalleUsuario(idUsuario));
 
         }
 

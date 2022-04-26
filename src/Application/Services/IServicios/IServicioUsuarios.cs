@@ -10,7 +10,7 @@ namespace Application.IServicios
     public interface IServicioUsuarios
     {
         List<Usuario> ListarUsuarios();
-        UsuarioInfo DetalleUsuario(string nombreUsuario);
+        UsuarioInfo DetalleUsuario(Guid idUsuario);
         bool ActualizarDatosUsuario(UsuarioInfo usuarioInfo, string nombreUsuario);
         bool ActualizarRolDeUsuario(string nombreUsuario, string rol);
     }

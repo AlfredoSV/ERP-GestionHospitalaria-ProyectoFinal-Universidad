@@ -51,29 +51,34 @@ namespace Infrastructure
             }
         }
 
-        public UsuarioInfo ConsultarDetalleUsuario(string nombreUsuario)
+        public UsuarioInfo ConsultarDetalleUsuario(Guid idUsuario)
         {
 
-            var data = new UsuarioInfo();
+            var usuario = new UsuarioInfo();
 
             var con = new SqlConnection(_connectionString);
             var cmd = new SqlCommand(@"select top 1 us.*, rolesName.Name from UsuariosInfor us full outer join EstadoCivil es on us.id_EstadoCivil = es.idEstadoC
                                         full outer join [dbo].[AspNetUsers] users on users.UserName = us.usuario  full outer join AspNetUserRoles roles
-                                        on users.Id = roles.UserId full outer join AspNetRoles rolesName on roles.RoleId = rolesName.Id where users.UserName = @user;", con);
-            cmd.Parameters.Add("user", SqlDbType.VarChar).Value = nombreUsuario;
+                                        on users.Id = roles.UserId full outer join AspNetRoles rolesName on roles.RoleId = rolesName.Id where users.Id  = @idUsuario;", con);
+            cmd.Parameters.Add("idUsuario", SqlDbType.UniqueIdentifier).Value = idUsuario;
             try
             {
                 con.Open();
                 var dr = cmd.ExecuteReader();
-                while (dr.Read())
+                if (dr.HasRows)
                 {
-                    data = UsuarioInfo.Create((Guid)dr["Id"], (string)dr["usuario"],
-                        (string)dr["correo"], (string)dr["direccion"], (int)dr["edad"],
-                        (string)dr["numCelular"], (string)dr["Name"], (string)dr["foto"],
-                        (string)dr["numDomicilio"], (Guid)dr["id_EstadoCivil"], (string)dr["nombre"], (string)dr["apellidoP"],
-                        (string)dr["apellidoM"], (string)dr["sexo"]);
+                    while (dr.Read())
+                    {
+                        usuario = UsuarioInfo.Create((Guid)dr["Id"], (string)dr["usuario"],
+                            (string)dr["correo"], (string)dr["direccion"], (int)dr["edad"],
+                            (string)dr["numCelular"], (string)dr["Name"], (string)dr["foto"],
+                            (string)dr["numDomicilio"], (Guid)dr["id_EstadoCivil"], (string)dr["nombre"], (string)dr["apellidoP"],
+                            (string)dr["apellidoM"], (string)dr["sexo"]);
+                    }
+
                 }
-                return data;
+                
+                return usuario;
             }
             catch (Exception e)
             {
