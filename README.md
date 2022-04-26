@@ -26,6 +26,4 @@
 ![cap8](https://github.com/AlfredoSV/ERP-GestionHospitalaria-ProyectoFinal-Universidad/blob/main/capturas/cap8.PNG)
 
 
-![cap9](https://github.com/AlfredoSV/ERP-GestionHospitalaria-ProyectoFinal-Universidad/blob/main/capturas/cap9.PNG)
-
 
