@@ -99,7 +99,7 @@ namespace Presentation.WebApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}");
+                    pattern: "{controller=Usuarios}/{action=Index}");
                 endpoints.MapRazorPages();
             });
 

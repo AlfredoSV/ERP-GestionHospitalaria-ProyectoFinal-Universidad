@@ -87,7 +87,7 @@ namespace Presentation.WebApp.Areas.Identity.Pages.Account
                     
                     _logger.LogInformation("User logged in.");
                     //return LocalRedirect(returnUrl);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Usuarios");
                     
                 }
                 if (result.RequiresTwoFactor)

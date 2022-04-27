@@ -52,7 +52,7 @@
                 </a>
                 <hr>
                 <ul class="nav nav-pills flex-column mb-auto">
-                    <li><a asp-controller="Home" asp-action="Index" class="nav-link text-white @if(ViewData["Title"].ToString().Equals("Inicio")){@("active") }"><i class="fas fa-home  "></i> Inicio</a></li>
+                    <li><a asp-controller="Usuarios" asp-action="Index" class="nav-link text-white @if(ViewData["Title"].ToString().Equals("Inicio")){@("active") }"><i class="fas fa-home  "></i> Inicio</a></li>
 
 
                 </ul>
@@ -62,7 +62,7 @@
                 <ul class="nav nav-pills flex-column mb-auto acorh">
 
                     <li>
-                        <a asp-controller="Home" asp-action="MisDatos" class="nav-link text-white @if(ViewData["Title"].ToString().Equals("Datos contacto")){@("active") }">
+                        <a asp-controller="Usuarios" asp-action="MisDatos" class="nav-link text-white @if(ViewData["Title"].ToString().Equals("Datos contacto")){@("active") }">
                             <i class="far fa-address-card"></i> Mi información
                         </a>
                     </li>
@@ -130,7 +130,7 @@
                             <i class="fas fa-users-cog"></i> Administración de Usuarios
                         </a>
                         <ul>
-                            <li><a asp-controller="Usuarios" asp-action="Index"><i class="fas fa-list"></i> Gestionar roles</a></li>
+                            <li><a asp-controller="Usuarios" asp-action="ListarUsuarios"><i class="fas fa-list"></i> Gestionar roles</a></li>
 
 
                         </ul>

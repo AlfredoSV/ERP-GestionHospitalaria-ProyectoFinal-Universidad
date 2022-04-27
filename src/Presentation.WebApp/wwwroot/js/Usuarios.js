@@ -85,9 +85,8 @@ const actualizarRol = () => {
     
 
     $.ajax({
-        url: location.origin + "/Home/ActualizartRol", 
+        url: location.origin + "/Usuarios/ActualizarRol",
         data: {
-            username: document.querySelector("#usuario").value,
             rol: document.querySelector("#nuevoRol").value
 
         },
