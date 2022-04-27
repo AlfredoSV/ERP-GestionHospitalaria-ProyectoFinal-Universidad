@@ -90,7 +90,7 @@ namespace Infrastructure
             }
         }
 
-        public bool ActualizarUsuario(UsuarioInfo usuarioInfo, string nombreUsuario)
+        public bool ActualizarUsuario(UsuarioInfo usuarioInfo)
         {
             var res = 0;
             var con = new SqlConnection(_connectionString);
@@ -105,7 +105,7 @@ namespace Infrastructure
                                       ,[id_EstadoCivil] = @idEstado
                                       ,[sexo] = @sexo
                                  WHERE usuario = @usuario", con);
-            cmd.Parameters.Add("usuario", SqlDbType.VarChar).Value = nombreUsuario;
+            cmd.Parameters.Add("usuario", SqlDbType.VarChar).Value = usuarioInfo.Usuario_N;
             cmd.Parameters.Add("correo", SqlDbType.VarChar).Value = usuarioInfo.Correo;
             cmd.Parameters.Add("direccion", SqlDbType.VarChar).Value = usuarioInfo.Direccion;
             cmd.Parameters.Add("edad", SqlDbType.Int).Value = usuarioInfo.Edad;
@@ -134,12 +134,12 @@ namespace Infrastructure
             return res > 0;
         }
 
-        public bool ActualizarRolDeUsuario(string nombreUsuario, string rol)
+        public bool ActualizarRolDeUsuario(Guid idUsuario, string rol)
         {
             var res = 0;
             var con = new SqlConnection(_connectionString);
-            var cmd = new SqlCommand(@"EXECUTE CambiarRol @rol,@usuario", con);
-            cmd.Parameters.Add("usuario", SqlDbType.VarChar).Value = nombreUsuario;
+            var cmd = new SqlCommand(@"EXECUTE [ActualizarRol] @rol,@idUsuario", con);
+            cmd.Parameters.Add("idUsuario", SqlDbType.UniqueIdentifier).Value = idUsuario;
             cmd.Parameters.Add("rol", SqlDbType.VarChar).Value = rol;
 
             try

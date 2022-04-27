@@ -10,7 +10,7 @@ namespace Domain.IRepositorios
     {
         List<Usuario> ConsultarUsuarios();
         UsuarioInfo ConsultarDetalleUsuario(Guid idUsuario);
-        bool ActualizarUsuario(UsuarioInfo usuarioInfo, string nombreUsuario);
-        bool ActualizarRolDeUsuario(string nombreUsuario, string rol);
+        bool ActualizarUsuario(UsuarioInfo usuarioInfo);
+        bool ActualizarRolDeUsuario(Guid idUsuario, string rol);
     }
 }

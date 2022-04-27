@@ -1,5 +1,6 @@
 ﻿using Application.IServicios;
 using Domain;
+using Domain.DTOS;
 using Domain.IRepositorios;
 using System;
 using System.Collections.Generic;
@@ -16,14 +17,18 @@ namespace Application.Servicios
         {
             _repositorioUsuarios = repositorioUsuarios;
         }
-        public bool ActualizarDatosUsuario(UsuarioInfo usuarioInfo, string nombreUsuario)
+        public bool ActualizarDatosUsuario(DtoUsuario dtoUsuario)
         {
-            return _repositorioUsuarios.ActualizarUsuario(usuarioInfo, nombreUsuario);
+            var usuario = UsuarioInfo.Create(dtoUsuario.Id, dtoUsuario.Usuario_N, dtoUsuario.Correo,
+                dtoUsuario.Direccion, dtoUsuario.Edad, dtoUsuario.NumCelular, dtoUsuario.Rol, dtoUsuario.FotoT,
+                dtoUsuario.NumDomicilio, dtoUsuario.Id_EstadoCivil, dtoUsuario.Nombre, dtoUsuario.ApellidoP,
+                dtoUsuario.ApellidoM, dtoUsuario.Sexo);
+            return _repositorioUsuarios.ActualizarUsuario(usuario);
         }
 
-        public bool ActualizarRolDeUsuario(string nombreUsuario, string rol)
+        public bool ActualizarRolDeUsuario(Guid idUsuario, string rol)
         {
-            return _repositorioUsuarios.ActualizarRolDeUsuario(nombreUsuario, rol);
+            return _repositorioUsuarios.ActualizarRolDeUsuario(idUsuario, rol);
         }
 
         public UsuarioInfo DetalleUsuario(Guid idUsuario)

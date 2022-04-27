@@ -12,6 +12,7 @@ using Application.IServicios;
 using Domain.IRepositorios;
 using Microsoft.AspNetCore.Identity;
 using System;
+using Domain.DTOS;
 
 namespace Presentation.WebApp.Controllers
 {
@@ -22,12 +23,11 @@ namespace Presentation.WebApp.Controllers
 
         private readonly IServicioCatalogos _servicioCatalogos;
         private readonly IServicioPaciente _servicioPaciente;
-        private readonly RepositorioDoctores _doctoresDbContext;
         private readonly IServicioUsuarios _servicioUsuarios;
         private readonly IServicioProducto _servicioProducto;
         private readonly IFileConvertService _fileConvertService;
         private readonly UserManager<IdentityUser> _userManager;
-
+        
         public HomeController(UserManager<IdentityUser> userManager, IFileConvertService fileConvertService, IServicioCitas servicioCitas, IServicioPaciente servicioPaciente, IServicioCatalogos servicioCatalogos, IServicioUsuarios servicioUsuarios,IServicioProducto servicioProducto)
         {
             _servicioPaciente = servicioPaciente;
@@ -37,6 +37,7 @@ namespace Presentation.WebApp.Controllers
             _servicioProducto = servicioProducto;
             _fileConvertService = fileConvertService;
             _userManager = userManager;
+
         }
 
 
@@ -93,9 +94,8 @@ namespace Presentation.WebApp.Controllers
             try
             {
                 Catalogos();
-                string nombreUsuario = HttpContext.User.Identity.Name;
-                var idUsuario = Guid.Parse(_userManager.Users.ToList().Where(u => u.UserName == nombreUsuario).FirstOrDefault().Id);
 
+                var idUsuario = Guid.Parse(_userManager.Users.ToList().Where(u => u.UserName == HttpContext.User.Identity.Name).FirstOrDefault().Id);
                 return View("MisDatos", _servicioUsuarios.DetalleUsuario(idUsuario));
             }
             catch (Exception exception)
@@ -108,33 +108,58 @@ namespace Presentation.WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult CambiarRol(string usuario, string rol)
+        public IActionResult ActualizartRol(string rol)
         {
+            try {
 
-            var seActualizo = _servicioUsuarios.ActualizarRolDeUsuario(usuario, rol);
+                var idUsuario= Guid.Parse(_userManager.Users.ToList().Where(u => u.UserName == HttpContext.User.Identity.Name).FirstOrDefault().Id);
+                _servicioUsuarios.ActualizarRolDeUsuario(idUsuario, rol);
 
-            return Json(seActualizo);
+                return Ok();
+            }
+
+            catch (Exception exception)
+            {
+
+                return StatusCode(500, exception);
+            }
+            
         }
 
         [HttpPost]
-        public IActionResult EditarMiInformacion(Domain.UsuarioInfo data)
+        public IActionResult EditarMiInformacion(UsuarioInfoViewModel usuario)
         {
-
-            string nombreUsuario = HttpContext.User.Identity.Name;
-            var idUsuario = Guid.Parse(_userManager.Users.ToList().Where(u => u.UserName == nombreUsuario).FirstOrDefault().Id);
-
-            if (ModelState.IsValid)
+            var nombreUsuario = string.Empty;
+            var idUsuario = Guid.Empty;
+            try
             {
-                data.FotoT = data.FotoFile == null ? _servicioUsuarios.DetalleUsuario(idUsuario).FotoT : _fileConvertService.ConvertirABase64(data.FotoFile.OpenReadStream()); ;
-                
-                var seActualizo = _servicioUsuarios.ActualizarDatosUsuario(data, nombreUsuario);
+                nombreUsuario = HttpContext.User.Identity.Name;
+                idUsuario = Guid.Parse(_userManager.Users.ToList().Where(u => u.UserName == nombreUsuario).FirstOrDefault().Id);
 
-                ViewBag.seActualizo = seActualizo;
+                if (ModelState.IsValid)
+                {
+                    usuario.FotoT = usuario.FotoFile == null ? _servicioUsuarios.DetalleUsuario(idUsuario).FotoT :
+                        _fileConvertService.ConvertirABase64(usuario.FotoFile.OpenReadStream()); ;
+
+                    var dtoUsuario = new DtoUsuario(idUsuario,nombreUsuario,usuario.Correo,
+                        usuario.Direccion,usuario.Edad,usuario.NumCelular,usuario.Rol,usuario.FotoT,usuario.NumDomicilio,
+                        usuario.Id_EstadoCivil,usuario.Nombre,usuario.ApellidoP,usuario.ApellidoM,usuario.Sexo);
+                    var seActualizo = _servicioUsuarios.ActualizarDatosUsuario(dtoUsuario);
+
+                    ViewBag.seActualizo = seActualizo;
+
+                    return View("MisDatos", _servicioUsuarios.DetalleUsuario(idUsuario));
+                }
 
                 return View("MisDatos", _servicioUsuarios.DetalleUsuario(idUsuario));
-            }
 
-            return View("MisDatos", _servicioUsuarios.DetalleUsuario(idUsuario));
+            }
+            catch (Exception exception)
+            {
+
+                return View("Error");
+            }
+            
 
         }
 

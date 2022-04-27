@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.DTOS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Application.IServicios
     {
         List<Usuario> ListarUsuarios();
         UsuarioInfo DetalleUsuario(Guid idUsuario);
-        bool ActualizarDatosUsuario(UsuarioInfo usuarioInfo, string nombreUsuario);
-        bool ActualizarRolDeUsuario(string nombreUsuario, string rol);
+        bool ActualizarDatosUsuario(DtoUsuario dtoUsuario);
+        bool ActualizarRolDeUsuario(Guid idUsuario, string rol);
     }
 }
