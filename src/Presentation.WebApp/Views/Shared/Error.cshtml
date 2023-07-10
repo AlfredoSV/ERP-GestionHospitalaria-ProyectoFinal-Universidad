@@ -11,6 +11,10 @@
         <hr>
         <p class="mb-0">Un error ha ocurrido, reintente mas tarde y si el problema persiste contacte con el administrador del sistema.</p>
 
-    
+        @if (!string.IsNullOrEmpty(Model.Message))
+        {
+            <p class="mb-0">@Model.Message</p>
+        }
+
     </div>
 </div>
