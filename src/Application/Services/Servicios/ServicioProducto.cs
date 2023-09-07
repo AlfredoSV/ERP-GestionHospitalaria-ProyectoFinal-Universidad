@@ -38,7 +38,7 @@ namespace Application.Servicios
 
         public bool GuardarNuevoProducto(Producto producto)
         {
-            return _repositorioProductos.EditarProducto(producto);
+            return _repositorioProductos.InsertarProducto(producto);
         }
     }
 }

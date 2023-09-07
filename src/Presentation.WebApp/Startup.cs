@@ -39,7 +39,8 @@ namespace Presentation.WebApp
             services.AddTransient<IServicioReporte, ServicioReporte>();
 
             var config = Configuration.GetSection("Smtp");
-            services.AddTransient<IServicioSmtpCorreo>(x =>   new ServicioSmtpCorreo(config["Displayname"], config["Address"], config["Host"], int.Parse(config["Port"]), config["Username"], config["Password"]));
+            services.AddTransient<IServicioSmtpCorreo>(x =>   
+            new ServicioSmtpCorreo(config["Displayname"], config["Address"], config["Host"], int.Parse(config["Port"]), config["Username"], config["Password"]));
 
             services.AddTransient<IRepositorioDoctores, RepositorioDoctores>();
             services.AddTransient<IRepositorioCitas, RepositorioCitas>();
