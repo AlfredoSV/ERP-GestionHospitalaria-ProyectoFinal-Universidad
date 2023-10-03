@@ -154,7 +154,7 @@ namespace Presentation.WebApp.Controllers
                 if (ModelState.IsValid)
                 {
                     usuario.FotoT = usuario.FotoFile == null ? _servicioUsuarios.DetalleUsuario(idUsuario).FotoT :
-                        _fileConvertService.ConvertirABase64(usuario.FotoFile.OpenReadStream()); ;
+                        _fileConvertService.ConvertToBase64(usuario.FotoFile.OpenReadStream()); ;
 
                     dtoUsuario = new DtoUsuario(idUsuario,nombreUsuario,usuario.Correo,
                         usuario.Direccion,usuario.Edad,usuario.NumCelular,usuario.Rol,usuario.FotoT,usuario.NumDomicilio,
