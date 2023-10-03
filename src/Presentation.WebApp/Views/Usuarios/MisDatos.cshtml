@@ -14,28 +14,29 @@
     </div>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="card-body" style=" font-size: 13px;">
-        <div class="row">
+        <div class="row mb-4">
             <div class="col">
                 <div class="text-center">
-                    <img id="miFoto" height="240" width="270" style="border-radius:120px !important;" src="@Model.FotoT" class="rounded">
+                    <img id="miFoto" height="200" width="230" src="@Model.FotoT" class="rounded">
                 </div>
 
             </div>
 
-
-
         </div>
         <form asp-action="EditarMiInformacion" asp-controller="Usuarios" method="post" enctype="multipart/form-data">
-
+            <hr />
+            <div class="row mt-2">
+                <h3>Datos generales</h3>
+            </div>
             <div class="row mt-3 mb-2">
                 <div class="col">
-                    Usuario:
-                    <input type="text" asp-for="Usuario_N" class="form-control" disabled>
+                    Identificador:
+                    <input type="text" asp-for="Id" name="Id" disabled class="form-control form-control-sm" placeholder="Identificador">
+                    <span asp-validation-for="Id" class="text-danger"></span>
                 </div>
                 <div class="col">
-                    Identificador:
-                    <input type="text" asp-for="Id" name="Id" disabled class="form-control" placeholder="Identificador">
-                    <span asp-validation-for="Id" class="text-danger"></span>
+                    Usuario:
+                    <input type="text" asp-for="Usuario_N" class="form-control form-control-sm" disabled>
                 </div>
             </div>
             <!-- ToDo -->
@@ -43,17 +44,17 @@
 
                 <div class="col">
                     Nombre:
-                    <input type="text" asp-for="Nombre" disabled class="form-control" placeholder="Nombre">
+                    <input type="text" asp-for="Nombre" disabled class="form-control form-control-sm" placeholder="Nombre">
                     <span asp-validation-for="Nombre" class="text-danger"></span>
                 </div>
                 <div class="col">
                     Apellido paterno:
-                    <input type="text" asp-for="ApellidoP" disabled class="form-control" placeholder="Apellido paterno">
+                    <input type="text" asp-for="ApellidoP" disabled class="form-control form-control-sm" placeholder="Apellido paterno">
                     <span asp-validation-for="ApellidoP" class="text-danger"></span>
                 </div>
                 <div class="col">
                     Apellido materno:
-                    <input type="text" asp-for="ApellidoM" disabled class="form-control" placeholder="Apellido materno">
+                    <input type="text" asp-for="ApellidoM" disabled class="form-control form-control-sm" placeholder="Apellido materno">
                     <span asp-validation-for="ApellidoM" class="text-danger"></span>
                 </div>
 
@@ -62,28 +63,29 @@
             <div class="row mt-3 mb-2">
                 <div class="col">
                     Edad:
-                    <input type="number" asp-for="Edad" class="form-control" min="1">
+                    <input type="number" asp-for="Edad" class="form-control form-control-sm" min="1">
                     <span asp-validation-for="Edad" class="text-danger"></span>
                 </div>
                 <div class="col">
                     Correo:
-                    <input type="text" asp-for="Correo" class="form-control">
+                    <input type="text" asp-for="Correo" class="form-control form-control-sm">
                     <span asp-validation-for="Correo" class="text-danger"></span>
                 </div>
 
-                <div class="col">
-                    Teléfono móvil:
-                    <input type="text" asp-for="NumCelular" class="form-control">
-                    <span asp-validation-for="NumCelular" class="text-danger"></span>
 
-                </div>
             </div>
             <div class="row mt-3 mb-2">
 
                 <div class="col">
                     Teléfono domicilio:
-                    <input type="text" asp-for="NumDomicilio" class="form-control">
+                    <input type="text" asp-for="NumDomicilio" class="form-control form-control-sm">
                     <span asp-validation-for="NumDomicilio" class="text-danger"></span>
+
+                </div>
+                <div class="col">
+                    Teléfono móvil:
+                    <input type="text" asp-for="NumCelular" class="form-control form-control-sm">
+                    <span asp-validation-for="NumCelular" class="text-danger"></span>
 
                 </div>
 
@@ -92,7 +94,7 @@
 
                 <div class="col">
                     Estado civil:
-                    <select asp-for="Id_EstadoCivil" asp-items="@ViewBag.estadosCiviles" class="form-control">
+                    <select asp-for="Id_EstadoCivil" asp-items="@ViewBag.estadosCiviles" class="form-control form-control-sm">
                     </select>
                     <span asp-validation-for="Id_EstadoCivil" class="text-danger"></span>
 
@@ -100,7 +102,7 @@
 
                 <div class="col">
                     Sexo:
-                    <select type="text" asp-for="Sexo" class="form-control">
+                    <select type="text" asp-for="Sexo" class="form-control form-control-sm">
 
                         <option value="Masculino">Masculino</option>
                         <option value="Femenino">Femenino</option>
@@ -111,28 +113,117 @@
                 </div>
             </div>
 
+            <div class="row mt-3 mb-4">
+                <div class="col-6">
+                    Rol:
+                    <input asp-for="Rol" disabled class="form-control form-control-sm" type="text" />
+                    <span asp-validation-for="Rol" class="text-danger"></span>
+                </div>
+                <div class="col-6">
+                    Fotografía:
+                    <input class="form-control form-control-sm" asp-for="FotoFile" accept=".jpg,.png" type="file">
+                    <span asp-validation-for="FotoFile" class="text-danger"></span>
+
+                </div>
+
+            </div>
+            <hr />
+            <div class="row mt-2">
+                <h3>Dirección</h3>
+            </div>
+
+
             <div class="row mt-3 mb-2">
 
                 <div class="col">
-                    Dirección:
-                    <textarea asp-for="Direccion" class="form-control"></textarea>
-                    <span asp-validation-for="Direccion" class="text-danger"></span>
+                    Estado:
+                    <select class="form-control form-control-sm">
+
+                        <option value="Aguascalientes">Aguascalientes</option>
+                        <option value="Baja California">Baja California</option>
+                        <option value="Baja California Sur">Baja California Sur</option>
+                        <option value="Campeche">Campeche</option>
+                        <option value="Chiapas">Chiapas</option>
+                        <option value="Chihuahua">Chihuahua</option>
+                        <option value="CDMX">Ciudad de México</option>
+                        <option value="Coahuila">Coahuila</option>
+                        <option value="Colima">Colima</option>
+                        <option value="Durango">Durango</option>
+                        <option value="Estado de México">Estado de México</option>
+                        <option value="Guanajuato">Guanajuato</option>
+                        <option value="Guerrero">Guerrero</option>
+                        <option value="Hidalgo">Hidalgo</option>
+                        <option value="Jalisco">Jalisco</option>
+                        <option value="Michoacán">Michoacán</option>
+                        <option value="Morelos">Morelos</option>
+                        <option value="Nayarit">Nayarit</option>
+                        <option value="Nuevo León">Nuevo León</option>
+                        <option value="Oaxaca">Oaxaca</option>
+                        <option value="Puebla">Puebla</option>
+                        <option value="Querétaro">Querétaro</option>
+                        <option value="Quintana Roo">Quintana Roo</option>
+                        <option value="San Luis Potosí">San Luis Potosí</option>
+                        <option value="Sinaloa">Sinaloa</option>
+                        <option value="Sonora">Sonora</option>
+                        <option value="Tabasco">Tabasco</option>
+                        <option value="Tamaulipas">Tamaulipas</option>
+                        <option value="Tlaxcala">Tlaxcala</option>
+                        <option value="Veracruz">Veracruz</option>
+                        <option value="Yucatán">Yucatán</option>
+                        <option value="Zacatecas">Zacatecas</option>
+                    </select>
+
                 </div>
                 <div class="col">
-                    Rol:
-                    <input asp-for="Rol" disabled class="form-control" type="text" />
-                    <span asp-validation-for="Rol" class="text-danger"></span>
+                    Calle:
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+                <div class="col">
+                    Colonia:
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+            </div>
+            <div class="row mt-3 mb-2">
+
+                <div class="col">
+                    Código Postal:
+                    <input type="text" class="form-control form-control-sm" >
+                </div>
+
+                <div class="col">
+                    Delegación:
+                    <select class="form-control form-control-sm">
+
+                        <option value="Iztapalapa">Iztapalapa</option>
+                        <option value="Iztacalco">Iztacalco</option>
+                        <option value="Azcapotzalco">Azcapotzalco</option>
+                        <option value="Coyoacán">Coyoacán</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-3 mb-2">
+
+                <div class="col">
+                    Num. Interior:
+                    <input type="text" class="form-control form-control-sm" >
+                </div>
+                <div class="col">
+                    Num. Exterior:
+                    <input type="text" class="form-control form-control-sm">
+                </div>
+                <div class="col">
+                    Referencias:
+                    <input type="text" class="form-control form-control-sm" placeholder="Entre que qué calles, Frente a.., Color de facahada...">
                 </div>
             </div>
 
-            <div class="mb-3">
-                Fotografía:
-                <input class="form-control" asp-for="FotoFile" accept=".jpg,.png" type="file">
-                <span asp-validation-for="FotoFile" class="text-danger"></span>
-
+            <div class="row mt-3 mb-2">
+                <div class="col">
+                    Referencias:
+                    <textarea rows="8" type="text" class="form-control form-control-sm" placeholder="Entre que qué calles, Frente a.., Color de facahada..."></textarea>
+                </div>
             </div>
-
-
             <br />
 
             @if (ViewBag.seActualizo != null)
@@ -157,8 +248,8 @@
 
             }
 
-            <button class="btn btn-success" type="submit"><i class="fas fa-plus"></i> Guardar</button> |
-            <a asp-action="Index" class="btn btn-danger"><i class="far fa-window-close"></i> Cancelar</a>
+            <button class="btn btn-success btn-sm" type="submit"><i class="fas fa-plus"></i> Guardar</button> |
+            <a asp-action="Index" class="btn btn-danger btn-sm"><i class="far fa-window-close"></i> Cancelar</a>
 
         </form>
 

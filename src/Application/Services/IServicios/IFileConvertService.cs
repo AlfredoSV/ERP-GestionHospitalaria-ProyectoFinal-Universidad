@@ -10,8 +10,8 @@ namespace Application.IServicios
 {
     public interface IFileConvertService
     {
-        string ConvertirABase64(Stream file, int w = 256);
-        MemoryStream RediImagen(MemoryStream ms, int w);
-        string ConvertirPDFABase64(IFormFile file);
+        string ConvertToBase64(Stream file, int w = 256);
+        MemoryStream ReadImagen(MemoryStream ms, int w);
+        string CovertPDFToBase64(IFormFile file);
     }
 }

@@ -7,8 +7,24 @@
 
 <div class="card p-2 mb-4 rounded m-3" style="border-radius:15px !important;">
     <div class="card-header card-headerP" style="border-radius: 15px 15px 0px 0px !important;">
-        <h1 class="h4"><i class="fas fa-home"></i> @ViewData["Title"]</h1>
+        <h1 class="h4"><i class="fas fa-home"></i> @ViewData["Title"] - Bienvenido @@User</h1>
     </div>
+
+    <div class="row mb-3 mt-2">
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-3">1</div>
+                <div class="col-3">2</div>
+                <div class="col-3">3</div>
+                <div class="col-3">4</div>
+
+            </div>
+        </div>
+
+    </div>
+    <hr />
     <div class="row mb-3">
         <div class="col-6">
 
@@ -98,16 +114,16 @@
 
 
 
-    const datosTiposProd = [];
+        const datosTiposProd = [];
 
-      @foreach (var d in ViewBag.dataTipoPro)
-      {
-          // Using the @: operator
-          //we can use javascript variables in razor C#
-        @:datosTiposProd.push("@d");
-    }
+        @foreach (var d in ViewBag.dataTipoPro)
+        {
+            // Using the @: operator
+            //we can use javascript variables in razor C#
+            @:datosTiposProd.push("@d");
+        }
 
-        var xValues = ["Insumos", "Medicamento", "Productos higiénicos" ,"Prótesis, órtesis y ayudas funcionales"];
+                        var xValues = ["Insumos", "Medicamento", "Productos higiénicos", "Prótesis, órtesis y ayudas funcionales"];
         var yValues = datosTiposProd;
         var barColors = [
             "#b91d47",
@@ -124,7 +140,7 @@
                     data: yValues
                 }]
             },
-             options: {
+            options: {
                 plugins: {
                     title: {
                         display: true,
@@ -133,80 +149,80 @@
                 }
             }
         });
- /*const labels = [
-    'Enero',
-    'Febreo',
-    'Marzo',
-    'Abril',
-    'Mayo',
-    'Junio',
-    'Julio',
-    'Agosto',
-    'Septiembre',
-    'Octubre',
-    'Noviembre',
-    'Diciembre'
-];
-*/
-const labels = [];
+        /*const labels = [
+           'Enero',
+           'Febreo',
+           'Marzo',
+           'Abril',
+           'Mayo',
+           'Junio',
+           'Julio',
+           'Agosto',
+           'Septiembre',
+           'Octubre',
+           'Noviembre',
+           'Diciembre'
+        ];
+        */
+        const labels = [];
 
-    @foreach (var d in ViewBag.Estaus)
-    {
-        // Using the @: operator
-        //we can use javascript variables in razor C#
-        @:labels.push("@d");
-    }
+        @foreach (var d in ViewBag.Estaus)
+        {
+            // Using the @: operator
+            //we can use javascript variables in razor C#
+            @:labels.push("@d");
+        }
 
-    const datos = [];
+                    const datos = [];
 
-      @foreach (var d in ViewBag.TotalPorEstatus)
-      {
-          // Using the @: operator
-          //we can use javascript variables in razor C#
-        @:datos.push("@d");
-    }
-            const estadosCiviles = [];
+        @foreach (var d in ViewBag.TotalPorEstatus)
+        {
+            // Using the @: operator
+            //we can use javascript variables in razor C#
+            @:datos.push("@d");
+        }
+                            const estadosCiviles = [];
 
-      @foreach (var d in ViewBag.EstadosCiviles)
-    {
-      	// Using the @: operator
-      	//we can use javascript variables in razor C#
-        @:estadosCiviles.push("@d");
-    }
+        @foreach (var d in ViewBag.EstadosCiviles)
+        {
+            // Using the @: operator
+            //we can use javascript variables in razor C#
+            @:estadosCiviles.push("@d");
+        }
 
-                 const dataestadosCiviles = [];
+                                 const dataestadosCiviles = [];
 
-      @foreach (var d in ViewBag.DataPacientesEsta)
-    {
-      	// Using the @: operator
-      	//we can use javascript variables in razor C#
-        @:dataestadosCiviles.push("@d");
-    }
-
-
-        ////////////////////////////////
-
-                    const sangre = [];
-
-      @foreach (var d in ViewBag.Sangre)
-    {
-      	// Using the @: operator
-      	//we can use javascript variables in razor C#
-        @:sangre.push("@d");
-    }
-
-                 const totalSangre = [];
-
-      @foreach (var d in ViewBag.TotalPorSangre)
-    {
-      	// Using the @: operator
-      	//we can use javascript variables in razor C#
-        @:totalSangre.push("@d");
-    }
+        @foreach (var d in ViewBag.DataPacientesEsta)
+        {
+            // Using the @: operator
+            //we can use javascript variables in razor C#
+            @:dataestadosCiviles.push("@d");
+        }
 
 
-        // Obtener una referencia al elemento canvas del DOM
-        const $grafica = document.querySelector("#bar-chart");
+                        ////////////////////////////////
+
+                                    const sangre = [];
+
+        @foreach (var d in ViewBag.Sangre)
+        {
+            // Using the @: operator
+            //we can use javascript variables in razor C#
+            @:sangre.push("@d");
+        }
+
+                                 const totalSangre = [];
+
+        @foreach (var d in ViewBag.TotalPorSangre)
+        {
+            // Using the @: operator
+            //we can use javascript variables in razor C#
+            @:totalSangre.push("@d");
+        }
+
+
+                        // Obtener una referencia al elemento canvas del DOM
+                        const $grafica = document.querySelector("#bar-chart");
         // Las etiquetas son las que van en el eje X.
         const etiquetas = estadosCiviles
         // Podemos tener varios conjuntos de datos. Comencemos con uno
@@ -275,11 +291,12 @@ const labels = [];
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Estatus de citas'
+                        text: 'Estatus de citas',
+                        fontSize: 50
                     }
                 }
             },
-             data: {
+            data: {
                 labels: etiquetas2,
                 datasets: [
                     datosIngresos,
@@ -295,7 +312,7 @@ const labels = [];
             data: {
                 datasets: [{
                     data: totalSangre,
-                    backgroundColor: ['#42a5f5', 'red', 'green', 'blue', 'violet', '#42a5df','#423hf5'],
+                    backgroundColor: ['#42a5f5', 'red', 'green', 'blue', 'violet', '#42a5df', '#423hf5'],
                     label: 'Comparacion de navegadores'
                 }],
                 labels: sangre

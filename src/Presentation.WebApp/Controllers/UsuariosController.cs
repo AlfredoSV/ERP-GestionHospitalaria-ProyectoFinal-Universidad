@@ -28,7 +28,10 @@ namespace Presentation.WebApp.Controllers
         private readonly IFileConvertService _fileConvertService;
         private readonly UserManager<IdentityUser> _userManager;
         
-        public UsuariosController(UserManager<IdentityUser> userManager, IFileConvertService fileConvertService, IServicioCitas servicioCitas, IServicioPaciente servicioPaciente, IServicioCatalogos servicioCatalogos, IServicioUsuarios servicioUsuarios,IServicioProducto servicioProducto)
+        public UsuariosController(UserManager<IdentityUser> userManager,
+                                  IFileConvertService fileConvertService, IServicioCitas servicioCitas, 
+                                  IServicioPaciente servicioPaciente, IServicioCatalogos servicioCatalogos, 
+                                  IServicioUsuarios servicioUsuarios,IServicioProducto servicioProducto)
         {
             _servicioPaciente = servicioPaciente;
             _servicioCitas = servicioCitas;
@@ -106,7 +109,7 @@ namespace Presentation.WebApp.Controllers
                 var idUsuario = Guid.Parse(_userManager.Users.ToList().Where(u => u.UserName == HttpContext.User.Identity.Name).FirstOrDefault().Id);
                 return View("MisDatos", _servicioUsuarios.DetalleUsuario(idUsuario));
             }
-            catch (Exception exception)
+            catch (Exception)
             {
 
                 return View("Error");
@@ -120,7 +123,10 @@ namespace Presentation.WebApp.Controllers
         {
             try {
 
-                var idUsuario= Guid.Parse(_userManager.Users.ToList().Where(u => u.UserName == HttpContext.User.Identity.Name).FirstOrDefault().Id);
+                Guid idUsuario= Guid.Parse(_userManager.Users.ToList()
+                    .Where(u => u.UserName == HttpContext.User.Identity.Name)
+                    .FirstOrDefault().Id);
+
                 _servicioUsuarios.ActualizarRolDeUsuario(idUsuario, rol);
 
                 return Ok();
@@ -128,7 +134,6 @@ namespace Presentation.WebApp.Controllers
 
             catch (Exception exception)
             {
-
                 return StatusCode(500, exception);
             }
             
@@ -137,8 +142,10 @@ namespace Presentation.WebApp.Controllers
         [HttpPost]
         public IActionResult EditarMiInformacion(UsuarioInfoViewModel usuario)
         {
-            var nombreUsuario = string.Empty;
-            var idUsuario = Guid.Empty;
+            string nombreUsuario = string.Empty;
+            Guid idUsuario = Guid.Empty;
+            DtoUsuario dtoUsuario;
+
             try
             {
                 nombreUsuario = HttpContext.User.Identity.Name;
@@ -147,14 +154,14 @@ namespace Presentation.WebApp.Controllers
                 if (ModelState.IsValid)
                 {
                     usuario.FotoT = usuario.FotoFile == null ? _servicioUsuarios.DetalleUsuario(idUsuario).FotoT :
-                        _fileConvertService.ConvertirABase64(usuario.FotoFile.OpenReadStream()); ;
+                        _fileConvertService.ConvertToBase64(usuario.FotoFile.OpenReadStream()); ;
 
-                    var dtoUsuario = new DtoUsuario(idUsuario,nombreUsuario,usuario.Correo,
+                    dtoUsuario = new DtoUsuario(idUsuario,nombreUsuario,usuario.Correo,
                         usuario.Direccion,usuario.Edad,usuario.NumCelular,usuario.Rol,usuario.FotoT,usuario.NumDomicilio,
                         usuario.Id_EstadoCivil,usuario.Nombre,usuario.ApellidoP,usuario.ApellidoM,usuario.Sexo);
-                    var seActualizo = _servicioUsuarios.ActualizarDatosUsuario(dtoUsuario);
+                                   
 
-                    ViewBag.seActualizo = seActualizo;
+                    ViewBag.seActualizo = _servicioUsuarios.ActualizarDatosUsuario(dtoUsuario);
 
                     return View("MisDatos", _servicioUsuarios.DetalleUsuario(idUsuario));
                 }
@@ -162,9 +169,8 @@ namespace Presentation.WebApp.Controllers
                 return View("MisDatos", _servicioUsuarios.DetalleUsuario(idUsuario));
 
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-
                 return View("Error");
             }
             
@@ -177,7 +183,8 @@ namespace Presentation.WebApp.Controllers
 
             foreach (var estado in _servicioCatalogos.ConsultarCatalogoEstadoCivil())
             {
-                listaEstadosCiviles.Add(new SelectListItem { Value = estado.IdEstado.ToString(), Text = estado.Nombre_Estado });
+                listaEstadosCiviles.Add(new SelectListItem { Value = estado.IdEstado.ToString(), 
+                    Text = estado.Nombre_Estado });
             }
 
             ViewBag.estadosCiviles = listaEstadosCiviles;

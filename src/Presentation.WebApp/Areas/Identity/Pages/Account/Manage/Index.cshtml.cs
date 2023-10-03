@@ -22,6 +22,7 @@ namespace Presentation.WebApp.Areas.Identity.Pages.Account.Manage
             _signInManager = signInManager;
         }
 
+        [Display(Name = "Usuario")]
         public string Username { get; set; }
 
         [TempData]
@@ -33,7 +34,7 @@ namespace Presentation.WebApp.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             [Phone]
-            [Display(Name = "Phone number")]
+            [Display(Name = "Numero de celular")]
             public string PhoneNumber { get; set; }
         }
 

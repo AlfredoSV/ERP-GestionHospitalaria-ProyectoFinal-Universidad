@@ -16,6 +16,7 @@
 		"processing": true,
 		deferRender: true,
 		scrollY: 500,
+		"autoWidth": false,
 		scrollCollapse: true,
 		scroller: true,
 		async: false,
@@ -36,7 +37,7 @@
 			{ 'data': 'fecha' },
 			{
 				mRender: function (data, type, row) {
-					return '<a href="#' + row.id + '" class="btn btn-danger m-1" onclick="eliminar(this)"><i class="material-icons">&#xe888;</i></a><a data-bs-toggle="modal" data-bs-target="#modalCita" data-bs-whatever="mdo"  href="#' + row.id + '" class="btn btn-info m-1" onclick="detalleCita(this)"><i class="material-icons">&#xe873;</i></a><a class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#modalCita" data-bs-whatever="mdo" onclick="editarCita(this)" href="#' + row.id + '"><i style="font-size: 28px" class="fas">&#xf044;</i></a >'
+					return '<a href="#' + row.id + '" class="btn btn-danger btn-sm m-1" onclick="eliminar(this)"><i class="material-icons" style="font-size: 20px">&#xe888;</i></a><a data-bs-toggle="modal" data-bs-target="#modalCita" data-bs-whatever="mdo"  href="#' + row.id + '" class="btn btn-info m-1 btn-sm" onclick="detalleCita(this)"><i class="material-icons" style="font-size: 20px">&#xe873;</i></a><a class="btn btn-primary m-1 btn-sm" data-bs-toggle="modal" data-bs-target="#modalCita" data-bs-whatever="mdo" onclick="editarCita(this)" href="#' + row.id + '"><i style="font-size: 20px" class="fas">&#xf044;</i></a >'
 				}
 			}
 		],
@@ -45,11 +46,21 @@
 			{
 
 				text: '<i class="fas fa-file-pdf"></i> Generar reporte',
+				className: 'btn btn- primary',
+				action: function (e, dt, node, config) {
+
+					window.open('/Citas/GenerarReporte', '_blank');
+				}
+
+			},
+			{
+
+				text: '<i class="fas fa-user-plus"></i> Crear nueva cita',
 				titleAttr: 'generarReporte',
 				className: 'btn-import',
 				action: function (e, dt, node, config) {
 
-					window.open('/Citas/GenerarReporte', '_blank');
+					window.open('/Citas/CrearCita','_self');
 				}
 
 			}
@@ -62,8 +73,6 @@
 
 
 }
-
-generarTablaCitas();
 
 const eliminar = (idCitaElimiar) => {
 
@@ -82,7 +91,6 @@ const eliminar = (idCitaElimiar) => {
 
 	).set('labels', { ok: 'Sí', cancel: 'No' });
 }
-
 
 const detalleCita = (cita) => {
 
@@ -130,3 +138,5 @@ function error(result) {
 		window.location.href = "/Citas/Error"
 	}	
 }
+
+generarTablaCitas();
