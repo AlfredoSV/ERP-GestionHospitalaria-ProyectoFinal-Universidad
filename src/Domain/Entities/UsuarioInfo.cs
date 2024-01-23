@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
+﻿
 using Microsoft.AspNetCore.Http;
+using System;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace Domain
 {
@@ -53,7 +52,7 @@ namespace Domain
 
         public string FotoT { get; set; }
 
-        public IFormFile FotoFile { get; set; }
+        public FormFile FotoFile { get; set; }
 
         [Required(ErrorMessage = "Es necesario ingresar un número de contacto")]
         public string NumDomicilio { get; set; }
